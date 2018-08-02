@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+tagStart=$(expr index "$IMAGE_NAME" :)
+repoName=${IMAGE_NAME:0:tagStart-1}
+
+for tag in {eap,eap-jdk8,1-eap,1-eap-jdk8,1.2-eap,1.2.60-eap,1.2.60-eap-jdk8,1.2.60-eap-75,1.2.60-eap-75-jdk8}; do
+    docker tag $IMAGE_NAME ${repoName}:${tag}
+    docker push ${repoName}:${tag}
+done

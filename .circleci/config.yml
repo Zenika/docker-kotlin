@@ -1,0 +1,30 @@
+version: 2
+
+jobs:
+
+  notify_kotlin_releases:
+    docker:
+      - image: circleci/node:9
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "8f:32:25:a0:59:0b:f4:1b:2b:ab:f7:c2:0a:ea:38:f6"
+      - checkout
+      - run: curl https://api.github.com/repos/JetBrains/kotlin/releases > notify_kotlin_releases/current.json
+      - run: node notify_kotlin_releases/filter-project
+      - run: node notify_kotlin_releases/notify
+      - run: cp notify_kotlin_releases/current.json notify_kotlin_releases/previous.json
+      - run: "git diff --exit-code --quiet -- notify_kotlin_releases/previous.json || (git add notify_kotlin_releases/previous.json && git config user.name $GITHUB_ACCOUNT && git config user.email $GITHUB_EMAIL && git commit -m \":pushpin: Update Kotlin previous releases\" && git push origin HEAD)"
+
+workflows:
+  version: 2
+  notify_kotlin_releases:
+    jobs:
+      - notify_kotlin_releases
+    triggers:
+     - schedule:
+         cron: "0 * * * *"
+         filters:
+           branches:
+             only:
+               - master
