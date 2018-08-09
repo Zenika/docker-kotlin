@@ -1,9 +1,11 @@
 package main
 
 import (
-	"html/template"
+	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
+	"text/template"
 )
 
 // Config contains information about the different versions
@@ -32,11 +34,39 @@ type Base struct {
 	AdditionalVersions []string
 }
 
+// Context contains information for the templates
+type Context struct {
+	Wd                 string
+	Version            string
+	CompilerURL        string
+	JDKVersion         string
+	AdditionalVersions []string
+}
+
+func contextWithVersion(version Version) Context {
+	return Context{Wd: filepath.Join(wd, version.Version), Version: version.Version, CompilerURL: version.CompilerURL}
+}
+
+func (ctxt Context) withJDKVersion(jdkVersion JDKVersion) Context {
+	ctxt.Wd = filepath.Join(ctxt.Wd, "jdk"+jdkVersion.JDKVersion)
+	ctxt.JDKVersion = jdkVersion.JDKVersion
+	return ctxt
+}
+
+func (ctxt Context) withBase(base Base) Context {
+	if base.Base != "default" {
+		ctxt.Wd = filepath.Join(ctxt.Wd, base.Base)
+	}
+	ctxt.AdditionalVersions = base.AdditionalVersions
+	return ctxt
+}
+
 var config = Config{
 	Bases: []string{"common", "default", "alpine"},
 	Versions: []Version{
 		{
-			Version: "1.1",
+			Version:     "1.1",
+			CompilerURL: "https://github.com/JetBrains/kotlin/releases/download/v1.1.61/kotlin-compiler-1.1.61.zip",
 			JDKVersions: []JDKVersion{
 				{
 					JDKVersion: "8",
@@ -57,21 +87,107 @@ var config = Config{
 }
 
 var (
-	templates = template.New("root")
+	templates = make(map[string][]*template.Template)
+	wd        string
 )
 
-func main() {
+func init() {
+	var err error
+	if wd, err = os.Getwd(); err != nil {
+		panic(err)
+	}
+}
+
+func init() {
 	if err := loadTemplates(); err != nil {
 		panic(err)
 	}
 }
 
-func loadTemplates() error {
-	wd, err := os.Getwd()
-	if err != nil {
+func main() {
+	for _, version := range config.Versions {
+		if err := generateVersion(version); err != nil {
+			panic(err)
+		}
+	}
+}
+
+func generateVersion(version Version) error {
+	ctxt := contextWithVersion(version)
+
+	if err := ensureDir(ctxt.Wd); err != nil {
 		return err
 	}
 
+	for _, jdkVersion := range version.JDKVersions {
+		if err := generateJDKVersion(ctxt, jdkVersion); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func generateJDKVersion(ctxt Context, jdkVersion JDKVersion) error {
+	ctxt = ctxt.withJDKVersion(jdkVersion)
+
+	if err := ensureDir(ctxt.Wd); err != nil {
+		return err
+	}
+
+	if err := generateBase(ctxt, jdkVersion.Base); err != nil {
+		return err
+	}
+
+	for _, variant := range jdkVersion.Variants {
+		if err := generateBase(ctxt, variant); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func generateBase(ctxt Context, base Base) error {
+	ctxt = ctxt.withBase(base)
+
+	if err := ensureDir(ctxt.Wd); err != nil {
+		return err
+	}
+
+	if err := generateTemplate(ctxt, "common"); err != nil {
+		return err
+	}
+	if err := generateTemplate(ctxt, base.Base); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func generateTemplate(ctxt Context, name string) error {
+	for _, template := range templates[name] {
+		fName := filepath.Join(ctxt.Wd, template.Name())
+
+		if err := ensureDir(filepath.Dir(fName)); err != nil {
+			return err
+		}
+
+		f, err := os.Create(fName)
+		if err != nil {
+			return err
+		}
+		defer f.Close()
+
+		if err := template.Execute(f, ctxt); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func loadTemplates() error {
 	templatesDir := filepath.Join(wd, "templates")
 
 	for _, base := range config.Bases {
@@ -84,7 +200,6 @@ func loadTemplates() error {
 }
 
 func loadTemplate(templatesDir, base string) error {
-	t := templates.New(base)
 	baseDir := filepath.Join(templatesDir, base)
 
 	return filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
@@ -92,8 +207,39 @@ func loadTemplate(templatesDir, base string) error {
 			return err
 		}
 
-		_, err = t.New(path).Parse(path)
+		if info.IsDir() {
+			return nil
+		}
 
-		return err
+		relPath, err := filepath.Rel(baseDir, path)
+		if err != nil {
+			return err
+		}
+
+		s, err := ioutil.ReadFile(path)
+		if err != nil {
+			return err
+		}
+
+		t := template.New(relPath)
+		t = t.Delims("#{", "}")
+		t = t.Funcs(template.FuncMap{
+			"join": func(sep string, args ...string) string { return strings.Join(args, sep) },
+		})
+		t = template.Must(t.Parse(string(s)))
+
+		templates[base] = append(templates[base], t)
+
+		return nil
 	})
+}
+
+func ensureDir(dir string) error {
+	_, err := os.Stat(dir)
+
+	if os.IsNotExist(err) {
+		return os.MkdirAll(dir, 0755)
+	}
+
+	return err
 }
