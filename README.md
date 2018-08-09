@@ -10,7 +10,7 @@ Kotlin is a statically-typed programming language that runs on the Java virtual 
 
 See https://en.wikipedia.org/wiki/Kotlin_%28programming_language%29 for more information.
 
-![Kotlin Logo](https://github.com/Zenika/kotlin/raw/master/Kotlin-logo.png)
+![Kotlin Logo](https://github.com/Zenika/docker-kotlin/raw/master/Kotlin-logo.png)
 
 ### Usage
 
@@ -24,6 +24,6 @@ See Kotlin compiler help : `docker container run -it --rm zenika/kotlin kotlinc 
 
  * Kotlin website : https://kotlinlang.org
 
- * Where to file issues : https://github.com/Zenika/kotlin/issues
+ * Where to file issues : https://github.com/Zenika/docker-kotlin/issues
 
  * Maintained by : https://www.zenika.com
