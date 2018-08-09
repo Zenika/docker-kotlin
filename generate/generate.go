@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 	"text/template"
+
+	"github.com/spf13/viper"
 )
 
 // Config contains information about the different versions
@@ -23,9 +25,9 @@ type Version struct {
 
 // JDKVersion contains information about a JDK version
 type JDKVersion struct {
-	Base
 	JDKVersion string
-	Variants   []Base
+	Base
+	Variants []Base
 }
 
 // Base contains information about a base
@@ -61,32 +63,8 @@ func (ctxt Context) withBase(base Base) Context {
 	return ctxt
 }
 
-var config = Config{
-	Bases: []string{"common", "default", "alpine"},
-	Versions: []Version{
-		{
-			Version:     "1.1",
-			CompilerURL: "https://github.com/JetBrains/kotlin/releases/download/v1.1.61/kotlin-compiler-1.1.61.zip",
-			JDKVersions: []JDKVersion{
-				{
-					JDKVersion: "8",
-					Base: Base{
-						Base:               "default",
-						AdditionalVersions: []string{"1.1.61-jdk8"},
-					},
-					Variants: []Base{
-						{
-							Base:               "alpine",
-							AdditionalVersions: []string{"1.1.61-jdk8-alpine"},
-						},
-					},
-				},
-			},
-		},
-	},
-}
-
 var (
+	config    Config
 	templates = make(map[string][]*template.Template)
 	wd        string
 )
@@ -96,6 +74,17 @@ func init() {
 	if wd, err = os.Getwd(); err != nil {
 		panic(err)
 	}
+}
+
+func init() {
+	viper.AddConfigPath(filepath.Join(wd))
+	viper.SetConfigName("versions")
+
+	if err := viper.ReadInConfig(); err != nil {
+		panic(err)
+	}
+
+	viper.Unmarshal(&config)
 }
 
 func init() {

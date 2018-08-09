@@ -1,0 +1,18 @@
+Bases:
+  - common
+  - default
+  - alpine
+
+Versions:
+  - Version: "1.1"
+    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.1.61/kotlin-compiler-1.1.61.zip
+    JDKVersions:
+      - JDKVersion: "8"
+        Base:
+          Base: default
+          AdditionalVersions:
+            - 1.1.61-jdk8
+        Variants:
+          - Base: "alpine"
+            AdditionalVersions:
+              - 1.1.61-jdk8-alpine
