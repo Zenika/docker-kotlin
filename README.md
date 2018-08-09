@@ -1,12 +1,8 @@
-[![Docker Build Status](https://img.shields.io/docker/build/zenika/alpine-kotlin.svg)](https://hub.docker.com/r/zenika/alpine-kotlin/) [![Docker Pulls](https://img.shields.io/docker/pulls/zenika/alpine-kotlin.svg)](https://hub.docker.com/r/zenika/alpine-kotlin/)
+[![Docker Build Status](https://img.shields.io/docker/build/zenika/kotlin.svg)](https://hub.docker.com/r/zenika/kotlin/) [![Docker Pulls](https://img.shields.io/docker/pulls/zenika/kotlin.svg)](https://hub.docker.com/r/zenika/kotlin/)
 
 ### Supported tags and respective `Dockerfile` links
 
- * `1.2.60-jdk8`, `1.2.60`, `1.2-jdk8`, `1.2`, `1-jdk8`, `1`, `jdk8`, `latest` [(jdk8/1.2/Dockerfile)](https://github.com/Zenika/alpine-kotlin/blob/master/jdk8/1.2/Dockerfile)
-
- * `1.3-M1-jdk8`, `1.3-M1`, `1.3-jdk8`, `1.3` [(jdk8/1.3/Dockerfile)](https://github.com/Zenika/alpine-kotlin/blob/master/jdk8/1.3/Dockerfile)
-
- * `1.1.61-jdk8`, `1.1.61`, `1.1-jdk8`, `1.1` [(jdk8/1.1/Dockerfile)](https://github.com/Zenika/alpine-kotlin/blob/master/jdk8/1.1/Dockerfile)
+:construction: Coming soon...
 
 ### What is Kotlin
 
@@ -14,20 +10,20 @@ Kotlin is a statically-typed programming language that runs on the Java virtual 
 
 See https://en.wikipedia.org/wiki/Kotlin_%28programming_language%29 for more information.
 
-![Kotlin Logo](https://github.com/Zenika/alpine-kotlin/raw/master/Kotlin-logo.png)
+![Kotlin Logo](https://github.com/Zenika/kotlin/raw/master/Kotlin-logo.png)
 
 ### Usage
 
-Start using the Kotlin REPL : `docker container run -it --rm zenika/alpine-kotlin`
+Start using the Kotlin REPL : `docker container run -it --rm zenika/kotlin`
 
-See Kotlin compiler version : `docker container run -it --rm zenika/alpine-kotlin kotlinc -version`
+See Kotlin compiler version : `docker container run -it --rm zenika/kotlin kotlinc -version`
 
-See Kotlin compiler help : `docker container run -it --rm zenika/alpine-kotlin kotlinc -help`
+See Kotlin compiler help : `docker container run -it --rm zenika/kotlin kotlinc -help`
 
 ### Reference
 
  * Kotlin website : https://kotlinlang.org
 
- * Where to file issues : https://github.com/Zenika/alpine-kotlin/issues
+ * Where to file issues : https://github.com/Zenika/kotlin/issues
 
  * Maintained by : https://www.zenika.com
