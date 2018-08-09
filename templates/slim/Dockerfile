@@ -13,8 +13,11 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vendor="Zenika" \
       org.label-schema.version="#{.Version}-jdk#{.JDKVersion}-slim"
 
-RUN cd /usr/lib && \
+RUN apt-get update && apt-get install -y --no-install-recommends wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    cd /usr/lib && \
     wget #{.CompilerURL} && \
+    apt-get remove -y wget && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
     rm kotlinc/bin/*.bat
