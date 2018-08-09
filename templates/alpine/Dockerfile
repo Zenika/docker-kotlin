@@ -11,7 +11,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/Zenika/docker-kotlin" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vendor="Zenika" \
-      org.label-schema.version="#{.Version}"
+      org.label-schema.version="#{.Version}-jdk#{.JDKVersion}-alpine"
 
 RUN apk add --no-cache bash && \
     apk add --no-cache -t build-dependencies wget && \

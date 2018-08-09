@@ -213,7 +213,7 @@ func loadTemplate(templatesDir, base string) error {
 		t := template.New(relPath)
 		t = t.Delims("#{", "}")
 		t = t.Funcs(template.FuncMap{
-			"join": func(sep string, args ...string) string { return strings.Join(args, sep) },
+			"join": strings.Join,
 		})
 		t = template.Must(t.Parse(string(s)))
 

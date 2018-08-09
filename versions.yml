@@ -4,6 +4,29 @@ Bases:
   - alpine
 
 Versions:
+  - Version: "1.2"
+    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.2.60/kotlin-compiler-1.2.60.zip
+    JDKVersions:
+      - JDKVersion: "8"
+        Base:
+          Base: default
+          AdditionalVersions:
+          - latest
+          - jdk8
+          - "1"
+          - 1-jdk8
+          - "1.2"
+          - "1.2.60"
+          - 1.2.60-jdk8
+        Variants:
+          - Base: "alpine"
+            AdditionalVersions:
+            - jdk8-alpine
+            - 1-alpine
+            - 1-jdk8-alpine
+            - 1.2-alpine
+            - 1.2.60-alpine
+            - 1.2.60-jdk8-alpine
   - Version: "1.1"
     CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.1.61/kotlin-compiler-1.1.61.zip
     JDKVersions:
@@ -11,8 +34,8 @@ Versions:
         Base:
           Base: default
           AdditionalVersions:
-            - 1.1.61-jdk8
+          - 1.1.61-jdk8
         Variants:
           - Base: "alpine"
             AdditionalVersions:
-              - 1.1.61-jdk8-alpine
+            - 1.1.61-jdk8-alpine

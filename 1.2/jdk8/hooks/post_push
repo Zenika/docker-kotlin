@@ -4,7 +4,7 @@ set -e
 tagStart=$(expr index "$IMAGE_NAME" :)
 repoName=${IMAGE_NAME:0:tagStart-1}
 
-for tag in #{if eq (len .AdditionalVersions) 1}"#{index .AdditionalVersions 0}"#{else}{#{join .AdditionalVersions ","}}#{end}; do
+for tag in {latest,jdk8,1,1-jdk8,1.2,1.2.60,1.2.60-jdk8}; do
     docker tag $IMAGE_NAME ${repoName}:${tag}
     docker push ${repoName}:${tag}
 done
