@@ -45,6 +45,14 @@ type Context struct {
 	AdditionalVersions []string
 }
 
+var (
+	config         Config
+	readmeTemplate *template.Template
+	templates      = make(map[string][]*template.Template)
+	templatesDir   string
+	wd             string
+)
+
 func contextWithVersion(version Version) Context {
 	return Context{Wd: filepath.Join(wd, version.Version), Version: version.Version, CompilerURL: version.CompilerURL}
 }
@@ -63,17 +71,12 @@ func (ctxt Context) withBase(base Base) Context {
 	return ctxt
 }
 
-var (
-	config    Config
-	templates = make(map[string][]*template.Template)
-	wd        string
-)
-
 func init() {
 	var err error
 	if wd, err = os.Getwd(); err != nil {
 		panic(err)
 	}
+	templatesDir = filepath.Join(wd, "templates")
 }
 
 func init() {
@@ -93,11 +96,20 @@ func init() {
 	}
 }
 
+func init() {
+	if err := loadReadmeTemplate(); err != nil {
+		panic(err)
+	}
+}
+
 func main() {
 	for _, version := range config.Versions {
 		if err := generateVersion(version); err != nil {
 			panic(err)
 		}
+	}
+	if err := generateReadme(); err != nil {
+		panic(err)
 	}
 }
 
@@ -144,43 +156,53 @@ func generateBase(ctxt Context, base Base) error {
 		return err
 	}
 
-	if err := generateTemplate(ctxt, "common"); err != nil {
+	if err := generateTemplates("common", ctxt); err != nil {
 		return err
 	}
-	if err := generateTemplate(ctxt, base.Base); err != nil {
+	if err := generateTemplates(base.Base, ctxt); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func generateTemplate(ctxt Context, name string) error {
-	for _, template := range templates[name] {
-		fName := filepath.Join(ctxt.Wd, template.Name())
-
-		if err := ensureDir(filepath.Dir(fName)); err != nil {
+func generateTemplates(name string, ctxt Context) error {
+	for _, t := range templates[name] {
+		if err := generateTemplate(t, ctxt, ctxt.Wd); err != nil {
 			return err
 		}
+	}
 
-		f, err := os.Create(fName)
-		if err != nil {
-			return err
-		}
-		defer f.Close()
+	return nil
+}
 
-		if err := template.Execute(f, ctxt); err != nil {
-			return err
-		}
+func generateReadme() error {
+	return generateTemplate(readmeTemplate, config, wd)
+}
+
+func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
+	fName := filepath.Join(outDir, t.Name())
+
+	if err := ensureDir(filepath.Dir(fName)); err != nil {
+		return err
+	}
+
+	f, err := os.Create(fName)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	if err := t.Execute(f, ctxt); err != nil {
+		return err
 	}
 
 	return nil
 }
 
 func loadTemplates() error {
-	templatesDir := filepath.Join(wd, "templates")
-
 	for _, base := range config.Bases {
-		if err := loadTemplate(templatesDir, base); err != nil {
+		if err := loadTemplate(base); err != nil {
 			return err
 		}
 	}
@@ -188,7 +210,7 @@ func loadTemplates() error {
 	return nil
 }
 
-func loadTemplate(templatesDir, base string) error {
+func loadTemplate(base string) error {
 	baseDir := filepath.Join(templatesDir, base)
 
 	return filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
@@ -205,22 +227,37 @@ func loadTemplate(templatesDir, base string) error {
 			return err
 		}
 
-		s, err := ioutil.ReadFile(path)
+		t, err := readTemplateFile(relPath, path)
 		if err != nil {
 			return err
 		}
-
-		t := template.New(relPath)
-		t = t.Delims("#{", "}")
-		t = t.Funcs(template.FuncMap{
-			"join": strings.Join,
-		})
-		t = template.Must(t.Parse(string(s)))
 
 		templates[base] = append(templates[base], t)
 
 		return nil
 	})
+}
+
+func loadReadmeTemplate() error {
+	var err error
+	readmeTemplate, err = readTemplateFile("README.md", filepath.Join(templatesDir, "README.md"))
+	return err
+}
+
+func readTemplateFile(name, path string) (*template.Template, error) {
+	s, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	t := template.New(name)
+	t = t.Delims("#{", "}")
+	t = t.Funcs(template.FuncMap{
+		"join": strings.Join,
+	})
+	t = template.Must(t.Parse(string(s)))
+
+	return t, nil
 }
 
 func ensureDir(dir string) error {
