@@ -2,7 +2,69 @@
 
 ### Supported tags and respective `Dockerfile` links
 
-:construction: Coming soon...
+#### 1.3
+
+ * `1.3-jdk11` [(1.3/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk11/Dockerfile)
+
+ * `1.3-jdk11-slim` [(1.3/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk11/slim/Dockerfile)
+
+ * `1.3-jdk10` [(1.3/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk10/Dockerfile)
+
+ * `1.3-jdk10-slim` [(1.3/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk10/slim/Dockerfile)
+
+ * `1.3-jdk8` [(1.3/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk8/Dockerfile)
+
+ * `1.3-jdk8-alpine` [(1.3/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk8/alpine/Dockerfile)
+
+ * `1.3-jdk8-slim` [(1.3/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk8/slim/Dockerfile)
+
+#### 1.2
+
+ * `1.2-jdk11` [(1.2/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk11/Dockerfile)
+
+ * `1.2-jdk11-slim` [(1.2/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk11/slim/Dockerfile)
+
+ * `1.2-jdk10` [(1.2/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk10/Dockerfile)
+
+ * `1.2-jdk10-slim` [(1.2/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk10/slim/Dockerfile)
+
+ * `1.2-jdk8` [(1.2/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/Dockerfile)
+
+ * `1.2-jdk8-alpine` [(1.2/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/alpine/Dockerfile)
+
+ * `1.2-jdk8-slim` [(1.2/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/slim/Dockerfile)
+
+#### 1.2-eap
+
+ * `1.2-eap-jdk11` [(1.2-eap/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk11/Dockerfile)
+
+ * `1.2-eap-jdk11-slim` [(1.2-eap/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk11/slim/Dockerfile)
+
+ * `1.2-eap-jdk10` [(1.2-eap/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk10/Dockerfile)
+
+ * `1.2-eap-jdk10-slim` [(1.2-eap/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk10/slim/Dockerfile)
+
+ * `1.2-eap-jdk8` [(1.2-eap/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/Dockerfile)
+
+ * `1.2-eap-jdk8-alpine` [(1.2-eap/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/alpine/Dockerfile)
+
+ * `1.2-eap-jdk8-slim` [(1.2-eap/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/slim/Dockerfile)
+
+#### 1.1
+
+ * `1.1-jdk11` [(1.1/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk11/Dockerfile)
+
+ * `1.1-jdk11-slim` [(1.1/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk11/slim/Dockerfile)
+
+ * `1.1-jdk10` [(1.1/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk10/Dockerfile)
+
+ * `1.1-jdk10-slim` [(1.1/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk10/slim/Dockerfile)
+
+ * `1.1-jdk8` [(1.1/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk8/Dockerfile)
+
+ * `1.1-jdk8-alpine` [(1.1/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk8/alpine/Dockerfile)
+
+ * `1.1-jdk8-slim` [(1.1/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk8/slim/Dockerfile)
 
 ### What is Kotlin
 
