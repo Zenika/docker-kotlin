@@ -9,7 +9,7 @@ current
     request({
       host: 'api.github.com',
       method: 'POST',
-      path: '/repos/Zenika/alpine-kotlin/issues',
+      path: '/repos/Zenika/docker-kotlin/issues',
       auth: `${process.env.GITHUB_ACCOUNT}:${process.env.GITHUB_OAUTH_TOKEN}`,
       headers: {
         'User-Agent': 'CircleCI'
