@@ -16,7 +16,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN apt-get update && apt-get install -y --no-install-recommends wget && \
     rm -rf /var/lib/apt/lists/* && \
     cd /usr/lib && \
-    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.60/kotlin-compiler-1.2.60.zip && \
+    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.61/kotlin-compiler-1.2.61.zip && \
     apt-get remove -y wget && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
