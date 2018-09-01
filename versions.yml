@@ -6,44 +6,44 @@ Bases:
 
 Versions:
   - Version: "1.3"
-    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.3-M1/kotlin-compiler-1.3-M1.zip
+    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.3-M2/kotlin-compiler-1.3-M2.zip
     JDKVersions:
       - JDKVersion: "11"
         Base:
           Base: default
           AdditionalVersions:
-            - 1.3-M1-jdk11
+            - 1.3-M2-jdk11
         Variants:
           - Base: slim
             AdditionalVersions:
-              - 1.3-M1-jdk11-slim
+              - 1.3-M2-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: default
           AdditionalVersions:
             - "1.3"
-            - 1.3-M1
-            - 1.3-M1-jdk10
+            - 1.3-M2
+            - 1.3-M2-jdk10
         Variants:
           - Base: slim
             AdditionalVersions:
               - 1.3-slim
-              - 1.3-M1-slim
-              - 1.3-M1-jdk10-slim
+              - 1.3-M2-slim
+              - 1.3-M2-jdk10-slim
       - JDKVersion: "8"
         Base:
           Base: default
           AdditionalVersions:
-            - 1.3-M1-jdk8
+            - 1.3-M2-jdk8
         Variants:
           - Base: alpine
             AdditionalVersions:
               - 1.3-alpine
-              - 1.3-M1-alpine
-              - 1.3-M1-jdk8-alpine
+              - 1.3-M2-alpine
+              - 1.3-M2-jdk8-alpine
           - Base: slim
             AdditionalVersions:
-              - 1.3-M1-jdk8-slim
+              - 1.3-M2-jdk8-slim
   - Version: "1.2"
     CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.2.61/kotlin-compiler-1.2.61.zip
     JDKVersions:
