@@ -14,7 +14,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version="1.2-eap-jdk10"
 
 RUN cd /usr/lib && \
-    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.70-eap-4/kotlin-compiler-1.2.70-eap-4.zip && \
+    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.70-eap-40/kotlin-compiler-1.2.70-eap-40.zip && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
     rm kotlinc/bin/*.bat

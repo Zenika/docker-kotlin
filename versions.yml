@@ -104,19 +104,19 @@ Versions:
               - 1-jdk8-slim
               - 1.2.61-jdk8-slim
   - Version: 1.2-eap
-    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.2.70-eap-4/kotlin-compiler-1.2.70-eap-4.zip
+    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.2.70-eap-40/kotlin-compiler-1.2.70-eap-40.zip
     JDKVersions:
       - JDKVersion: "11"
         Base:
           Base: default
           AdditionalVersions:
             - 1.2.70-eap-jdk11
-            - 1.2.70-eap-4-jdk11
+            - 1.2.70-eap-40-jdk11
         Variants:
           - Base: slim
             AdditionalVersions:
               - 1.2.70-eap-jdk11-slim
-              - 1.2.70-eap-4-jdk11-slim
+              - 1.2.70-eap-40-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: default
@@ -124,34 +124,34 @@ Versions:
             - 1.2-eap
             - 1.2.70-eap
             - 1.2.70-eap-jdk10
-            - 1.2.70-eap-4
-            - 1.2.70-eap-4-jdk10
+            - 1.2.70-eap-40
+            - 1.2.70-eap-40-jdk10
         Variants:
           - Base: slim
             AdditionalVersions:
               - 1.2-eap-slim
               - 1.2.70-eap-slim
               - 1.2.70-eap-jdk10-slim
-              - 1.2.70-eap-4-slim
-              - 1.2.70-eap-4-jdk10-slim
+              - 1.2.70-eap-40-slim
+              - 1.2.70-eap-40-jdk10-slim
       - JDKVersion: "8"
         Base:
           Base: default
           AdditionalVersions:
             - 1.2.70-eap-jdk8
-            - 1.2.70-eap-4-jdk8
+            - 1.2.70-eap-40-jdk8
         Variants:
           - Base: alpine
             AdditionalVersions:
               - 1.2-eap-alpine
               - 1.2.70-eap-alpine
               - 1.2.70-eap-jdk8-alpine
-              - 1.2.70-eap-4-alpine
-              - 1.2.70-eap-4-jdk8-alpine
+              - 1.2.70-eap-40-alpine
+              - 1.2.70-eap-40-jdk8-alpine
           - Base: slim
             AdditionalVersions:
               - 1.2.70-eap-jdk8-slim
-              - 1.2.70-eap-4-jdk8-slim
+              - 1.2.70-eap-40-jdk8-slim
   - Version: "1.1"
     CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.1.61/kotlin-compiler-1.1.61.zip
     JDKVersions:

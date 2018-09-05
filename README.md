@@ -36,19 +36,19 @@
 
 #### 1.2-eap
 
- * `1.2-eap-jdk11`, `1.2.70-eap-jdk11`, `1.2.70-eap-4-jdk11` [(1.2-eap/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk11/Dockerfile)
+ * `1.2-eap-jdk11`, `1.2.70-eap-jdk11`, `1.2.70-eap-40-jdk11` [(1.2-eap/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk11/Dockerfile)
 
- * `1.2-eap-jdk11-slim`, `1.2.70-eap-jdk11-slim`, `1.2.70-eap-4-jdk11-slim` [(1.2-eap/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk11/slim/Dockerfile)
+ * `1.2-eap-jdk11-slim`, `1.2.70-eap-jdk11-slim`, `1.2.70-eap-40-jdk11-slim` [(1.2-eap/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk11/slim/Dockerfile)
 
- * `1.2-eap-jdk10`, `1.2-eap`, `1.2.70-eap`, `1.2.70-eap-jdk10`, `1.2.70-eap-4`, `1.2.70-eap-4-jdk10` [(1.2-eap/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk10/Dockerfile)
+ * `1.2-eap-jdk10`, `1.2-eap`, `1.2.70-eap`, `1.2.70-eap-jdk10`, `1.2.70-eap-40`, `1.2.70-eap-40-jdk10` [(1.2-eap/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk10/Dockerfile)
 
- * `1.2-eap-jdk10-slim`, `1.2-eap-slim`, `1.2.70-eap-slim`, `1.2.70-eap-jdk10-slim`, `1.2.70-eap-4-slim`, `1.2.70-eap-4-jdk10-slim` [(1.2-eap/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk10/slim/Dockerfile)
+ * `1.2-eap-jdk10-slim`, `1.2-eap-slim`, `1.2.70-eap-slim`, `1.2.70-eap-jdk10-slim`, `1.2.70-eap-40-slim`, `1.2.70-eap-40-jdk10-slim` [(1.2-eap/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk10/slim/Dockerfile)
 
- * `1.2-eap-jdk8`, `1.2.70-eap-jdk8`, `1.2.70-eap-4-jdk8` [(1.2-eap/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/Dockerfile)
+ * `1.2-eap-jdk8`, `1.2.70-eap-jdk8`, `1.2.70-eap-40-jdk8` [(1.2-eap/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/Dockerfile)
 
- * `1.2-eap-jdk8-alpine`, `1.2-eap-alpine`, `1.2.70-eap-alpine`, `1.2.70-eap-jdk8-alpine`, `1.2.70-eap-4-alpine`, `1.2.70-eap-4-jdk8-alpine` [(1.2-eap/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/alpine/Dockerfile)
+ * `1.2-eap-jdk8-alpine`, `1.2-eap-alpine`, `1.2.70-eap-alpine`, `1.2.70-eap-jdk8-alpine`, `1.2.70-eap-40-alpine`, `1.2.70-eap-40-jdk8-alpine` [(1.2-eap/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/alpine/Dockerfile)
 
- * `1.2-eap-jdk8-slim`, `1.2.70-eap-jdk8-slim`, `1.2.70-eap-4-jdk8-slim` [(1.2-eap/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/slim/Dockerfile)
+ * `1.2-eap-jdk8-slim`, `1.2.70-eap-jdk8-slim`, `1.2.70-eap-40-jdk8-slim` [(1.2-eap/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2-eap/jdk8/slim/Dockerfile)
 
 #### 1.1
 
