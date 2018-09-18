@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget && \
     apt-get remove -y wget && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
-    rm kotlinc/bin/*.bat
+    rm -f kotlinc/bin/*.bat
 
 ENV PATH $PATH:/usr/lib/kotlinc/bin
 

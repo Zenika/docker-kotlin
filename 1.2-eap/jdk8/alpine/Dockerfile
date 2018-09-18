@@ -19,7 +19,7 @@ RUN apk add --no-cache bash && \
     wget https://github.com/JetBrains/kotlin/releases/download/v1.2.70-eap-40/kotlin-compiler-1.2.70-eap-40.zip && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
-    rm kotlinc/bin/*.bat && \
+    rm -f kotlinc/bin/*.bat && \
     apk del --no-cache build-dependencies
 
 ENV PATH $PATH:/usr/lib/kotlinc/bin

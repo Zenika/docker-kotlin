@@ -17,7 +17,7 @@ RUN cd /usr/lib && \
     wget #{.CompilerURL} && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
-    rm kotlinc/bin/*.bat
+    rm -f kotlinc/bin/*.bat
 
 ENV PATH $PATH:/usr/lib/kotlinc/bin
 

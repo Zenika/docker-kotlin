@@ -19,7 +19,7 @@ RUN apk add --no-cache bash && \
     wget #{.CompilerURL} && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
-    rm kotlinc/bin/*.bat && \
+    rm -f kotlinc/bin/*.bat && \
     apk del --no-cache build-dependencies
 
 ENV PATH $PATH:/usr/lib/kotlinc/bin
