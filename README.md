@@ -20,19 +20,19 @@
 
 #### 1.2
 
- * `1.2-jdk11`, `jdk11`, `1-jdk11`, `1.2.61-jdk11` [(1.2/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk11/Dockerfile)
+ * `1.2-jdk11`, `jdk11`, `1-jdk11`, `1.2.70-jdk11` [(1.2/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk11/Dockerfile)
 
- * `1.2-jdk11-slim`, `jdk11-slim`, `1-jdk11-slim`, `1.2.61-jdk11-slim` [(1.2/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk11/slim/Dockerfile)
+ * `1.2-jdk11-slim`, `jdk11-slim`, `1-jdk11-slim`, `1.2.70-jdk11-slim` [(1.2/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk11/slim/Dockerfile)
 
- * `1.2-jdk10`, `latest`, `jdk10`, `1`, `1-jdk10`, `1.2`, `1.2.61`, `1.2.61-jdk10` [(1.2/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk10/Dockerfile)
+ * `1.2-jdk10`, `latest`, `jdk10`, `1`, `1-jdk10`, `1.2`, `1.2.70`, `1.2.70-jdk10` [(1.2/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk10/Dockerfile)
 
- * `1.2-jdk10-slim`, `slim`, `jdk10-slim`, `1-slim`, `1-jdk10-slim`, `1.2-slim`, `1.2.61-slim`, `1.2.61-jdk10-slim` [(1.2/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk10/slim/Dockerfile)
+ * `1.2-jdk10-slim`, `slim`, `jdk10-slim`, `1-slim`, `1-jdk10-slim`, `1.2-slim`, `1.2.70-slim`, `1.2.70-jdk10-slim` [(1.2/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk10/slim/Dockerfile)
 
- * `1.2-jdk8`, `jdk8`, `1-jdk8`, `1.2.61-jdk8` [(1.2/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/Dockerfile)
+ * `1.2-jdk8`, `jdk8`, `1-jdk8`, `1.2.70-jdk8` [(1.2/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/Dockerfile)
 
- * `1.2-jdk8-alpine`, `alpine`, `jdk8-alpine`, `1-alpine`, `1-jdk8-alpine`, `1.2-alpine`, `1.2.61-alpine`, `1.2.61-jdk8-alpine` [(1.2/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/alpine/Dockerfile)
+ * `1.2-jdk8-alpine`, `alpine`, `jdk8-alpine`, `1-alpine`, `1-jdk8-alpine`, `1.2-alpine`, `1.2.70-alpine`, `1.2.70-jdk8-alpine` [(1.2/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/alpine/Dockerfile)
 
- * `1.2-jdk8-slim`, `jdk8-slim`, `1-jdk8-slim`, `1.2.61-jdk8-slim` [(1.2/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/slim/Dockerfile)
+ * `1.2-jdk8-slim`, `jdk8-slim`, `1-jdk8-slim`, `1.2.70-jdk8-slim` [(1.2/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk8/slim/Dockerfile)
 
 #### 1.2-eap
 
