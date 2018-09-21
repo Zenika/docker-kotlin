@@ -14,7 +14,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version="1.2-jdk11"
 
 RUN cd /usr/lib && \
-    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.70/kotlin-compiler-1.2.70-linux-x64.zip && \
+    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.70/kotlin-compiler-1.2.70.zip && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
     rm -f kotlinc/bin/*.bat
