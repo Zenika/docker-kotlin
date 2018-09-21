@@ -8,8 +8,3 @@ for tag in {alpine,jdk8-alpine,1-alpine,1-jdk8-alpine,1.2-alpine,1.2.70-alpine,1
     docker tag $IMAGE_NAME ${repoName}:${tag}
     docker push ${repoName}:${tag}
 done
-
-for tag in {jdk8,1,1-jdk8,1.2,11.2-jdk8,1.2.70,1.2.70-jdk8}; do
-    docker tag $IMAGE_NAME zenika/alpine-kotlin:${tag}
-    docker push zenika/alpine-kotlin:${tag}
-done
