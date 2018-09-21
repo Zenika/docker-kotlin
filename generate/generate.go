@@ -32,17 +32,25 @@ type JDKVersion struct {
 
 // Base contains information about a base
 type Base struct {
-	Base               string
-	AdditionalVersions []string
+	Base                   string
+	AdditionalTags         []string
+	AdditionalRepositories []AdditionalRepository
+}
+
+// AdditionalRepository contains information about an additional repository
+type AdditionalRepository struct {
+	Repository string
+	Tags       []string
 }
 
 // Context contains information for the templates
 type Context struct {
-	Wd                 string
-	Version            string
-	CompilerURL        string
-	JDKVersion         string
-	AdditionalVersions []string
+	Wd                     string
+	Version                string
+	CompilerURL            string
+	JDKVersion             string
+	AdditionalTags         []string
+	AdditionalRepositories []AdditionalRepository
 }
 
 var (
@@ -67,7 +75,8 @@ func (ctxt Context) withBase(base Base) Context {
 	if base.Base != "default" {
 		ctxt.Wd = filepath.Join(ctxt.Wd, base.Base)
 	}
-	ctxt.AdditionalVersions = base.AdditionalVersions
+	ctxt.AdditionalTags = base.AdditionalTags
+	ctxt.AdditionalRepositories = base.AdditionalRepositories
 	return ctxt
 }
 

@@ -4,7 +4,13 @@ set -e
 tagStart=$(expr index "$IMAGE_NAME" :)
 repoName=${IMAGE_NAME:0:tagStart-1}
 
-for tag in #{if eq (len .AdditionalVersions) 1}"#{index .AdditionalVersions 0}"#{else}{#{join .AdditionalVersions ","}}#{end}; do
+for tag in #{if eq (len .AdditionalTags) 1}"#{index .AdditionalTags 0}"#{else}{#{join .AdditionalTags ","}}#{end}; do
     docker tag $IMAGE_NAME ${repoName}:${tag}
     docker push ${repoName}:${tag}
 done
+#{range $_, $additionalRepository := .AdditionalRepositories}
+for tag in #{if eq (len $additionalRepository.Tags) 1}"#{index $additionalRepository.Tags 0}"#{else}{#{join $additionalRepository.Tags ","}}#{end}; do
+    docker tag $IMAGE_NAME #{$additionalRepository.Repository}:${tag}
+    docker push #{$additionalRepository.Repository}:${tag}
+done
+#{end}

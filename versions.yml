@@ -11,20 +11,20 @@ Versions:
       - JDKVersion: "11"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - 1.3.0-jdk11
             - 1.3-rc-57-jdk11
             - 1.3.0-rc-57-jdk11
         Variants:
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.3.0-jdk11-slim
               - 1.3-rc-57-jdk11-slim
               - 1.3.0-rc-57-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - 1.3.0-jdk10
             - "1.3"
             - "1.3.0"
@@ -34,7 +34,7 @@ Versions:
             - 1.3.0-rc-57-jdk10
         Variants:
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.3.0-jdk10-slim
               - 1.3-slim
               - 1.3.0-slim
@@ -45,13 +45,13 @@ Versions:
       - JDKVersion: "8"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - 1.3.0-jdk8
             - 1.3-rc-57-jdk8
             - 1.3.0-rc-57-jdk8
         Variants:
           - Base: alpine
-            AdditionalVersions:
+            AdditionalTags:
               - 1.3.0-jdk8-alpine
               - 1.3-alpine
               - 1.3.0-alpine
@@ -59,8 +59,19 @@ Versions:
               - 1.3.0-rc-57-alpine
               - 1.3-rc-57-jdk8-alpine
               - 1.3.0-rc-57-jdk8-alpine
+            AdditionalRepositories:
+              - Repository: zenika/alpine-kotlin
+                Tags:
+                  - "1.3"
+                  - 1.3-jdk8
+                  - "1.3.0"
+                  - 1.3.0-jdk8
+                  - 1.3-rc-57
+                  - 1.3.0-rc-57
+                  - 1.3-rc-57-jdk8
+                  - 1.3.0-rc-57-jdk8
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.3.0-jdk8-slim
               - 1.3-rc-57-jdk8-slim
               - 1.3.0-rc-57-jdk8-slim
@@ -70,20 +81,20 @@ Versions:
       - JDKVersion: "11"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - jdk11
             - 1-jdk11
             - 1.2.70-jdk11
         Variants:
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - jdk11-slim
               - 1-jdk11-slim
               - 1.2.70-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - latest
             - jdk10
             - "1"
@@ -93,7 +104,7 @@ Versions:
             - 1.2.70-jdk10
         Variants:
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - slim
               - jdk10-slim
               - 1-slim
@@ -104,13 +115,13 @@ Versions:
       - JDKVersion: "8"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - jdk8
             - 1-jdk8
             - 1.2.70-jdk8
         Variants:
           - Base: alpine
-            AdditionalVersions:
+            AdditionalTags:
               - alpine
               - jdk8-alpine
               - 1-alpine
@@ -118,8 +129,19 @@ Versions:
               - 1.2-alpine
               - 1.2.70-alpine
               - 1.2.70-jdk8-alpine
+            AdditionalRepositories:
+              - Repository: zenika/alpine-kotlin
+                Tags:
+                  - latest
+                  - jdk8
+                  - "1"
+                  - 1-jdk8
+                  - "1.2"
+                  - 1.2-jdk8
+                  - "1.2.70"
+                  - 1.2.70-jdk8
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - jdk8-slim
               - 1-jdk8-slim
               - 1.2.70-jdk8-slim
@@ -129,18 +151,18 @@ Versions:
       - JDKVersion: "11"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - 1.2.70-eap-jdk11
             - 1.2.70-eap-40-jdk11
         Variants:
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.2.70-eap-jdk11-slim
               - 1.2.70-eap-40-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - 1.2-eap
             - 1.2.70-eap
             - 1.2.70-eap-jdk10
@@ -148,7 +170,7 @@ Versions:
             - 1.2.70-eap-40-jdk10
         Variants:
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.2-eap-slim
               - 1.2.70-eap-slim
               - 1.2.70-eap-jdk10-slim
@@ -157,19 +179,28 @@ Versions:
       - JDKVersion: "8"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - 1.2.70-eap-jdk8
             - 1.2.70-eap-40-jdk8
         Variants:
           - Base: alpine
-            AdditionalVersions:
+            AdditionalTags:
               - 1.2-eap-alpine
               - 1.2.70-eap-alpine
               - 1.2.70-eap-jdk8-alpine
               - 1.2.70-eap-40-alpine
               - 1.2.70-eap-40-jdk8-alpine
+            AdditionalRepositories:
+              - Repository: zenika/alpine-kotlin
+                Tags:
+                  - 1.2-eap
+                  - 1.2-eap-jdk8
+                  - 1.2.70-eap
+                  - 1.2.70-eap-jdk8
+                  - 1.2.70-eap-40
+                  - 1.2.70-eap-40-jdk8
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.2.70-eap-jdk8-slim
               - 1.2.70-eap-40-jdk8-slim
   - Version: "1.1"
@@ -178,36 +209,43 @@ Versions:
       - JDKVersion: "11"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - 1.1.61-jdk11
         Variants:
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.1.61-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - "1.1"
             - "1.1.61"
             - 1.1.61-jdk10
         Variants:
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.1-slim
               - 1.1.61-slim
               - 1.1.61-jdk10-slim
       - JDKVersion: "8"
         Base:
           Base: default
-          AdditionalVersions:
+          AdditionalTags:
             - 1.1.61-jdk8
         Variants:
           - Base: alpine
-            AdditionalVersions:
+            AdditionalTags:
               - 1.1-alpine
               - 1.1.61-alpine
               - 1.1.61-jdk8-alpine
+            AdditionalRepositories:
+              - Repository: zenika/alpine-kotlin
+                Tags:
+                  - "1.1"
+                  - 1.1-jdk8
+                  - "1.1.61"
+                  - 1.1.61-jdk8
           - Base: slim
-            AdditionalVersions:
+            AdditionalTags:
               - 1.1.61-jdk8-slim

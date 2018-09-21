@@ -4,9 +4,9 @@
 #{range $_, $version := .Versions}
 #### #{$version.Version}
 #{range $_, $jdkVersion := $version.JDKVersions}
- * `#{$version.Version}-jdk#{$jdkVersion.JDKVersion}`#{range $_, $additionalVersion := $jdkVersion.Base.AdditionalVersions}, `#{$additionalVersion}`#{end} [(#{$version.Version}/jdk#{$jdkVersion.JDKVersion}/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/#{$version.Version}/jdk#{$jdkVersion.JDKVersion}/Dockerfile)
+ * `#{$version.Version}-jdk#{$jdkVersion.JDKVersion}`#{range $_, $additionalTag := $jdkVersion.Base.AdditionalTags}, `#{$additionalTag}`#{end} [(#{$version.Version}/jdk#{$jdkVersion.JDKVersion}/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/#{$version.Version}/jdk#{$jdkVersion.JDKVersion}/Dockerfile)
 #{range $_, $variant := $jdkVersion.Variants}
- * `#{$version.Version}-jdk#{$jdkVersion.JDKVersion}-#{$variant.Base}`#{range $_, $additionalVersion := $variant.AdditionalVersions}, `#{$additionalVersion}`#{end} [(#{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/#{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}/Dockerfile)
+ * `#{$version.Version}-jdk#{$jdkVersion.JDKVersion}-#{$variant.Base}`#{range $_, $additionalTag := $variant.AdditionalTags}, `#{$additionalTag}`#{end} [(#{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/#{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}/Dockerfile)
 #{end}#{end}#{end}
 ### What is Kotlin
 
