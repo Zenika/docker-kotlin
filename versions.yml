@@ -76,7 +76,7 @@ Versions:
               - 1.3-rc-57-jdk8-slim
               - 1.3.0-rc-57-jdk8-slim
   - Version: "1.2"
-    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.2.70/kotlin-compiler-1.2.70.zip
+    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.2.71/kotlin-compiler-1.2.71.zip
     JDKVersions:
       - JDKVersion: "11"
         Base:
@@ -84,13 +84,13 @@ Versions:
           AdditionalTags:
             - jdk11
             - 1-jdk11
-            - 1.2.70-jdk11
+            - 1.2.71-jdk11
         Variants:
           - Base: slim
             AdditionalTags:
               - jdk11-slim
               - 1-jdk11-slim
-              - 1.2.70-jdk11-slim
+              - 1.2.71-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: default
@@ -100,8 +100,8 @@ Versions:
             - "1"
             - 1-jdk10
             - "1.2"
-            - "1.2.70"
-            - 1.2.70-jdk10
+            - "1.2.71"
+            - 1.2.71-jdk10
         Variants:
           - Base: slim
             AdditionalTags:
@@ -110,15 +110,15 @@ Versions:
               - 1-slim
               - 1-jdk10-slim
               - 1.2-slim
-              - 1.2.70-slim
-              - 1.2.70-jdk10-slim
+              - 1.2.71-slim
+              - 1.2.71-jdk10-slim
       - JDKVersion: "8"
         Base:
           Base: default
           AdditionalTags:
             - jdk8
             - 1-jdk8
-            - 1.2.70-jdk8
+            - 1.2.71-jdk8
         Variants:
           - Base: alpine
             AdditionalTags:
@@ -127,8 +127,8 @@ Versions:
               - 1-alpine
               - 1-jdk8-alpine
               - 1.2-alpine
-              - 1.2.70-alpine
-              - 1.2.70-jdk8-alpine
+              - 1.2.71-alpine
+              - 1.2.71-jdk8-alpine
             AdditionalRepositories:
               - Repository: zenika/alpine-kotlin
                 Tags:
@@ -138,13 +138,13 @@ Versions:
                   - 1-jdk8
                   - "1.2"
                   - 1.2-jdk8
-                  - "1.2.70"
-                  - 1.2.70-jdk8
+                  - "1.2.71"
+                  - 1.2.71-jdk8
           - Base: slim
             AdditionalTags:
               - jdk8-slim
               - 1-jdk8-slim
-              - 1.2.70-jdk8-slim
+              - 1.2.71-jdk8-slim
   - Version: 1.2-eap
     CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.2.70-eap-40/kotlin-compiler-1.2.70-eap-40.zip
     JDKVersions:
