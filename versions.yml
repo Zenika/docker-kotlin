@@ -6,21 +6,21 @@ Bases:
 
 Versions:
   - Version: "1.3"
-    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.3-rc2/kotlin-compiler-1.3.0-rc-116.zip
+    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.3-rc3/kotlin-compiler-1.3.0-rc-146.zip
     JDKVersions:
       - JDKVersion: "11"
         Base:
           Base: default
           AdditionalTags:
             - 1.3.0-jdk11
-            - 1.3-rc-116-jdk11
-            - 1.3.0-rc-116-jdk11
+            - 1.3-rc-146-jdk11
+            - 1.3.0-rc-146-jdk11
         Variants:
           - Base: slim
             AdditionalTags:
               - 1.3.0-jdk11-slim
-              - 1.3-rc-116-jdk11-slim
-              - 1.3.0-rc-116-jdk11-slim
+              - 1.3-rc-146-jdk11-slim
+              - 1.3.0-rc-146-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: default
@@ -28,37 +28,37 @@ Versions:
             - 1.3.0-jdk10
             - "1.3"
             - "1.3.0"
-            - 1.3-rc-116
-            - 1.3.0-rc-116
-            - 1.3-rc-116-jdk10
-            - 1.3.0-rc-116-jdk10
+            - 1.3-rc-146
+            - 1.3.0-rc-146
+            - 1.3-rc-146-jdk10
+            - 1.3.0-rc-146-jdk10
         Variants:
           - Base: slim
             AdditionalTags:
               - 1.3.0-jdk10-slim
               - 1.3-slim
               - 1.3.0-slim
-              - 1.3-rc-116-slim
-              - 1.3.0-rc-116-slim
-              - 1.3-rc-116-jdk10-slim
-              - 1.3.0-rc-116-jdk10-slim
+              - 1.3-rc-146-slim
+              - 1.3.0-rc-146-slim
+              - 1.3-rc-146-jdk10-slim
+              - 1.3.0-rc-146-jdk10-slim
       - JDKVersion: "8"
         Base:
           Base: default
           AdditionalTags:
             - 1.3.0-jdk8
-            - 1.3-rc-116-jdk8
-            - 1.3.0-rc-116-jdk8
+            - 1.3-rc-146-jdk8
+            - 1.3.0-rc-146-jdk8
         Variants:
           - Base: alpine
             AdditionalTags:
               - 1.3.0-jdk8-alpine
               - 1.3-alpine
               - 1.3.0-alpine
-              - 1.3-rc-116-alpine
-              - 1.3.0-rc-116-alpine
-              - 1.3-rc-116-jdk8-alpine
-              - 1.3.0-rc-116-jdk8-alpine
+              - 1.3-rc-146-alpine
+              - 1.3.0-rc-146-alpine
+              - 1.3-rc-146-jdk8-alpine
+              - 1.3.0-rc-146-jdk8-alpine
             AdditionalRepositories:
               - Repository: zenika/alpine-kotlin
                 Tags:
@@ -66,15 +66,15 @@ Versions:
                   - 1.3-jdk8
                   - "1.3.0"
                   - 1.3.0-jdk8
-                  - 1.3-rc-116
-                  - 1.3.0-rc-116
-                  - 1.3-rc-116-jdk8
-                  - 1.3.0-rc-116-jdk8
+                  - 1.3-rc-146
+                  - 1.3.0-rc-146
+                  - 1.3-rc-146-jdk8
+                  - 1.3.0-rc-146-jdk8
           - Base: slim
             AdditionalTags:
               - 1.3.0-jdk8-slim
-              - 1.3-rc-116-jdk8-slim
-              - 1.3.0-rc-116-jdk8-slim
+              - 1.3-rc-146-jdk8-slim
+              - 1.3.0-rc-146-jdk8-slim
   - Version: "1.2"
     CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.2.71/kotlin-compiler-1.2.71.zip
     JDKVersions:
