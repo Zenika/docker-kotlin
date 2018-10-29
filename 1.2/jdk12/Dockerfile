@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk
+FROM openjdk:12-jdk
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -11,10 +11,10 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/Zenika/docker-kotlin" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vendor="Zenika" \
-      org.label-schema.version="1.2-eap-jdk11"
+      org.label-schema.version="1.2-jdk12"
 
 RUN cd /usr/lib && \
-    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.70-eap-40/kotlin-compiler-1.2.70-eap-40.zip && \
+    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.71/kotlin-compiler-1.2.71.zip && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
     rm -f kotlinc/bin/*.bat

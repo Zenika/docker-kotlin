@@ -1,4 +1,4 @@
-FROM openjdk:10-jdk-slim
+FROM openjdk:12-jdk-slim
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -11,12 +11,12 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/Zenika/docker-kotlin" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vendor="Zenika" \
-      org.label-schema.version="1.2-eap-jdk10-slim"
+      org.label-schema.version="1.2-jdk12-slim"
 
 RUN apt-get update && apt-get install -y --no-install-recommends wget && \
     rm -rf /var/lib/apt/lists/* && \
     cd /usr/lib && \
-    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.70-eap-40/kotlin-compiler-1.2.70-eap-40.zip && \
+    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.71/kotlin-compiler-1.2.71.zip && \
     apt-get remove -y wget && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
