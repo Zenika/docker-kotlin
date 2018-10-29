@@ -4,7 +4,7 @@ set -e
 tagStart=$(expr index "$IMAGE_NAME" :)
 repoName=${IMAGE_NAME:0:tagStart-1}
 
-for tag in {jdk11,1-jdk11,1.2.71-jdk11}; do
+for tag in "1.2.71-jdk11"; do
     docker tag $IMAGE_NAME ${repoName}:${tag}
     docker push ${repoName}:${tag}
 done

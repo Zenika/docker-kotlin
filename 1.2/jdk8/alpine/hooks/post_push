@@ -4,12 +4,12 @@ set -e
 tagStart=$(expr index "$IMAGE_NAME" :)
 repoName=${IMAGE_NAME:0:tagStart-1}
 
-for tag in {alpine,jdk8-alpine,1-alpine,1-jdk8-alpine,1.2-alpine,1.2.71-alpine,1.2.71-jdk8-alpine}; do
+for tag in {1.2-alpine,1.2.71-alpine,1.2.71-jdk8-alpine}; do
     docker tag $IMAGE_NAME ${repoName}:${tag}
     docker push ${repoName}:${tag}
 done
 
-for tag in {latest,jdk8,1,1-jdk8,1.2,1.2-jdk8,1.2.71,1.2.71-jdk8}; do
+for tag in {1.2,1.2-jdk8,1.2.71,1.2.71-jdk8}; do
     docker tag $IMAGE_NAME zenika/alpine-kotlin:${tag}
     docker push zenika/alpine-kotlin:${tag}
 done
