@@ -1,8 +1,9 @@
 Bases:
   - common
-  - default
+  - debian
   - slim
   - alpine
+  - oracle
 
 Versions:
   - Version: "1.3"
@@ -10,7 +11,7 @@ Versions:
     JDKVersions:
       - JDKVersion: "12"
         Base:
-          Base: default
+          Base: oracle
           AdditionalTags:
             - jdk12
             - 1-jdk12
@@ -18,7 +19,7 @@ Versions:
         Variants:
       - JDKVersion: "11"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - latest
             - "1"
@@ -39,7 +40,7 @@ Versions:
               - 1.3.0-jdk11-slim
       - JDKVersion: "10"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - jdk10
             - 1-jdk10
@@ -52,7 +53,7 @@ Versions:
               - 1.3.0-jdk10-slim
       - JDKVersion: "8"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - jdk8
             - 1-jdk8
@@ -88,13 +89,13 @@ Versions:
     JDKVersions:
       - JDKVersion: "12"
         Base:
-          Base: default
+          Base: oracle
           AdditionalTags:
             - 1.2.71-jdk12
         Variants:
       - JDKVersion: "11"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - "1.2"
             - "1.2.71"
@@ -107,7 +108,7 @@ Versions:
               - 1.2.71-jdk11-slim
       - JDKVersion: "10"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - 1.2.71-jdk10
         Variants:
@@ -116,7 +117,7 @@ Versions:
               - 1.2.71-jdk10-slim
       - JDKVersion: "8"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - 1.2.71-jdk8
         Variants:
@@ -140,13 +141,13 @@ Versions:
     JDKVersions:
       - JDKVersion: "12"
         Base:
-          Base: default
+          Base: oracle
           AdditionalTags:
             - 1.1.61-jdk12
         Variants:
       - JDKVersion: "11"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - "1.1"
             - "1.1.61"
@@ -159,7 +160,7 @@ Versions:
               - 1.1.61-jdk11-slim
       - JDKVersion: "10"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - 1.1.61-jdk10
         Variants:
@@ -168,7 +169,7 @@ Versions:
               - 1.1.61-jdk10-slim
       - JDKVersion: "8"
         Base:
-          Base: default
+          Base: debian
           AdditionalTags:
             - 1.1.61-jdk8
         Variants:

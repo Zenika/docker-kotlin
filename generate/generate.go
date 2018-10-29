@@ -71,8 +71,8 @@ func (ctxt Context) withJDKVersion(jdkVersion JDKVersion) Context {
 	return ctxt
 }
 
-func (ctxt Context) withBase(base Base) Context {
-	if base.Base != "default" {
+func (ctxt Context) withBase(base Base, isDefault bool) Context {
+	if !isDefault {
 		ctxt.Wd = filepath.Join(ctxt.Wd, base.Base)
 	}
 	ctxt.AdditionalTags = base.AdditionalTags
@@ -145,12 +145,12 @@ func generateJDKVersion(ctxt Context, jdkVersion JDKVersion) error {
 		return err
 	}
 
-	if err := generateBase(ctxt, jdkVersion.Base); err != nil {
+	if err := generateBase(ctxt, jdkVersion.Base, true); err != nil {
 		return err
 	}
 
 	for _, variant := range jdkVersion.Variants {
-		if err := generateBase(ctxt, variant); err != nil {
+		if err := generateBase(ctxt, variant, false); err != nil {
 			return err
 		}
 	}
@@ -158,8 +158,8 @@ func generateJDKVersion(ctxt Context, jdkVersion JDKVersion) error {
 	return nil
 }
 
-func generateBase(ctxt Context, base Base) error {
-	ctxt = ctxt.withBase(base)
+func generateBase(ctxt Context, base Base, isDefault bool) error {
+	ctxt = ctxt.withBase(base, isDefault)
 
 	if err := ensureDir(ctxt.Wd); err != nil {
 		return err
