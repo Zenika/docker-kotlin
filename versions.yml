@@ -16,11 +16,6 @@ Versions:
             - 1-jdk12
             - 1.3.0-jdk12
         Variants:
-          - Base: slim
-            AdditionalTags:
-              - jdk12-slim
-              - 1-jdk12-slim
-              - 1.3.0-jdk12-slim
       - JDKVersion: "11"
         Base:
           Base: default
@@ -97,9 +92,6 @@ Versions:
           AdditionalTags:
             - 1.2.71-jdk12
         Variants:
-          - Base: slim
-            AdditionalTags:
-              - 1.2.71-jdk12-slim
       - JDKVersion: "11"
         Base:
           Base: default
@@ -152,9 +144,6 @@ Versions:
           AdditionalTags:
             - 1.1.61-jdk12
         Variants:
-          - Base: slim
-            AdditionalTags:
-              - 1.1.61-jdk12-slim
       - JDKVersion: "11"
         Base:
           Base: default

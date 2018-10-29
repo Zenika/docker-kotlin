@@ -6,8 +6,6 @@
 
  * `1.3-jdk12`, `jdk12`, `1-jdk12`, `1.3.0-jdk12` [(1.3/jdk12/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk12/Dockerfile)
 
- * `1.3-jdk12-slim`, `jdk12-slim`, `1-jdk12-slim`, `1.3.0-jdk12-slim` [(1.3/jdk12/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk12/slim/Dockerfile)
-
  * `1.3-jdk11`, `latest`, `1`, `1.3`, `1.3.0`, `jdk11`, `1-jdk11`, `1.3.0-jdk11` [(1.3/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk11/Dockerfile)
 
  * `1.3-jdk11-slim`, `slim`, `1-slim`, `1.3-slim`, `1.3.0-slim`, `jdk11-slim`, `1-jdk11-slim`, `1.3.0-jdk11-slim` [(1.3/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk11/slim/Dockerfile)
@@ -26,8 +24,6 @@
 
  * `1.2-jdk12`, `1.2.71-jdk12` [(1.2/jdk12/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk12/Dockerfile)
 
- * `1.2-jdk12-slim`, `1.2.71-jdk12-slim` [(1.2/jdk12/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk12/slim/Dockerfile)
-
  * `1.2-jdk11`, `1.2`, `1.2.71`, `1.2.71-jdk11` [(1.2/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk11/Dockerfile)
 
  * `1.2-jdk11-slim`, `1.2-slim`, `1.2.71-slim`, `1.2.71-jdk11-slim` [(1.2/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.2/jdk11/slim/Dockerfile)
@@ -45,8 +41,6 @@
 #### 1.1
 
  * `1.1-jdk12`, `1.1.61-jdk12` [(1.1/jdk12/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk12/Dockerfile)
-
- * `1.1-jdk12-slim`, `1.1.61-jdk12-slim` [(1.1/jdk12/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk12/slim/Dockerfile)
 
  * `1.1-jdk11`, `1.1`, `1.1.61`, `1.1.61-jdk11` [(1.1/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.1/jdk11/Dockerfile)
 
