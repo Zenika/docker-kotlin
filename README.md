@@ -2,6 +2,26 @@
 
 ### Supported tags and respective `Dockerfile` links
 
+#### 1.3-eap
+
+ * `1.3-eap-jdk12`, `1.3.20-eap-jdk12`, `1.3.20-eap-25-jdk12` [(1.3-eap/jdk12/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk12/Dockerfile)
+
+ * `1.3-eap-jdk12-alpine`, `1.3.20-eap-jdk12-alpine`, `1.3.20-eap-25-jdk12-alpine` [(1.3-eap/jdk12/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk12/alpine/Dockerfile)
+
+ * `1.3-eap-jdk11`, `1.3.20-eap`, `1.3.20-eap-25`, `1.3.20-eap-jdk11`, `1.3.20-eap-25-jdk11` [(1.3-eap/jdk11/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk11/Dockerfile)
+
+ * `1.3-eap-jdk11-slim`, `1.3.20-eap-slim`, `1.3.20-eap-25-slim`, `1.3.20-eap-jdk11-slim`, `1.3.20-eap-25-jdk11-slim` [(1.3-eap/jdk11/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk11/slim/Dockerfile)
+
+ * `1.3-eap-jdk10`, `1.3.20-eap-jdk10`, `1.3.20-eap-25-jdk10` [(1.3-eap/jdk10/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk10/Dockerfile)
+
+ * `1.3-eap-jdk10-slim`, `1.3.20-eap-jdk10-slim`, `1.3.20-eap-25-jdk10-slim` [(1.3-eap/jdk10/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk10/slim/Dockerfile)
+
+ * `1.3-eap-jdk8`, `1.3.20-eap-jdk8`, `1.3.20-eap-25-jdk8` [(1.3-eap/jdk8/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk8/Dockerfile)
+
+ * `1.3-eap-jdk8-alpine`, `1.3.20-eap-alpine`, `1.3.20-eap-25-alpine`, `1.3.20-eap-jdk8-alpine`, `1.3.20-eap-25-jdk8-alpine` [(1.3-eap/jdk8/alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk8/alpine/Dockerfile)
+
+ * `1.3-eap-jdk8-slim`, `1.3.20-eap-jdk8-slim`, `1.3.20-eap-25-jdk8-slim` [(1.3-eap/jdk8/slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3-eap/jdk8/slim/Dockerfile)
+
 #### 1.3
 
  * `1.3-jdk12`, `jdk12`, `1-jdk12`, `1.3.11-jdk12` [(1.3/jdk12/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/1.3/jdk12/Dockerfile)
