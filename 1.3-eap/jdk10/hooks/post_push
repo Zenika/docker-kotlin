@@ -4,7 +4,7 @@ set -e
 tagStart=$(expr index "$IMAGE_NAME" :)
 repoName=${IMAGE_NAME:0:tagStart-1}
 
-for tag in {1.3.20-eap-jdk10,1.3.20-eap-100-jdk10}; do
+for tag in {1.3.30-eap-jdk10,1.3.30-eap-11-jdk10}; do
     docker tag $IMAGE_NAME ${repoName}:${tag}
     docker push ${repoName}:${tag}
 done
