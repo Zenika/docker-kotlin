@@ -7,74 +7,74 @@ Bases:
 
 Versions:
   - Version: 1.3-eap
-    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.3.40-eap-21/kotlin-compiler-1.3.40-eap-21.zip
+    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.3.40-eap-67/kotlin-compiler-1.3.40-eap-67.zip
     JDKVersions:
       - JDKVersion: "12"
         Base:
           Base: oracle
           AdditionalTags:
             - 1.3.40-eap-jdk12
-            - 1.3.40-eap-21-jdk12
+            - 1.3.40-eap-67-jdk12
         Variants:
           - Base: alpine
             AdditionalTags:
               - 1.3.40-eap-jdk12-alpine
-              - 1.3.40-eap-21-jdk12-alpine
+              - 1.3.40-eap-67-jdk12-alpine
             AdditionalRepositories:
               - Repository: zenika/alpine-kotlin
                 Tags:
                   - 1.3.40-eap-jdk12
-                  - 1.3.40-eap-21-jdk12
+                  - 1.3.40-eap-67-jdk12
       - JDKVersion: "11"
         Base:
           Base: debian
           AdditionalTags:
             - 1.3.40-eap
-            - 1.3.40-eap-21
+            - 1.3.40-eap-67
             - 1.3.40-eap-jdk11
-            - 1.3.40-eap-21-jdk11
+            - 1.3.40-eap-67-jdk11
         Variants:
           - Base: slim
             AdditionalTags:
               - 1.3.40-eap-slim
-              - 1.3.40-eap-21-slim
+              - 1.3.40-eap-67-slim
               - 1.3.40-eap-jdk11-slim
-              - 1.3.40-eap-21-jdk11-slim
+              - 1.3.40-eap-67-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: debian
           AdditionalTags:
             - 1.3.40-eap-jdk10
-            - 1.3.40-eap-21-jdk10
+            - 1.3.40-eap-67-jdk10
         Variants:
           - Base: slim
             AdditionalTags:
               - 1.3.40-eap-jdk10-slim
-              - 1.3.40-eap-21-jdk10-slim
+              - 1.3.40-eap-67-jdk10-slim
       - JDKVersion: "8"
         Base:
           Base: debian
           AdditionalTags:
             - 1.3.40-eap-jdk8
-            - 1.3.40-eap-21-jdk8
+            - 1.3.40-eap-67-jdk8
         Variants:
           - Base: alpine
             AdditionalTags:
               - 1.3.40-eap-alpine
-              - 1.3.40-eap-21-alpine
+              - 1.3.40-eap-67-alpine
               - 1.3.40-eap-jdk8-alpine
-              - 1.3.40-eap-21-jdk8-alpine
+              - 1.3.40-eap-67-jdk8-alpine
             AdditionalRepositories:
               - Repository: zenika/alpine-kotlin
                 Tags:
                   - 1.3.40-eap
-                  - 1.3.40-eap-21
+                  - 1.3.40-eap-67
                   - 1.3.40-eap-jdk8
-                  - 1.3.40-eap-21-jdk8
+                  - 1.3.40-eap-67-jdk8
           - Base: slim
             AdditionalTags:
               - 1.3.40-eap-jdk8-slim
-              - 1.3.40-eap-21-jdk8-slim
+              - 1.3.40-eap-67-jdk8-slim
   - Version: "1.3"
     CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.3.31/kotlin-compiler-1.3.31.zip
     JDKVersions:
