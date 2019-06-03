@@ -16,7 +16,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN apk add --no-cache bash && \
     apk add --no-cache -t build-dependencies wget && \
     cd /usr/lib && \
-    wget #{.CompilerURL} && \
+    wget -q #{.CompilerURL} && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
     rm -f kotlinc/bin/*.bat && \

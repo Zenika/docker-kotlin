@@ -14,7 +14,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version="#{.Version}-jdk#{.JDKVersion}"
 
 RUN cd /usr/lib && \
-    wget #{.CompilerURL} && \
+    wget -q #{.CompilerURL} && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
     rm -f kotlinc/bin/*.bat

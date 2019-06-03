@@ -13,12 +13,14 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vendor="Zenika" \
       org.label-schema.version="#{.Version}-jdk#{.JDKVersion}-slim"
 
-RUN apt-get update && apt-get install -y --no-install-recommends wget && \
+RUN apt-get update && apt-get install -y --no-install-recommends wget unzip && \
     rm -rf /var/lib/apt/lists/* && \
     cd /usr/lib && \
-    wget #{.CompilerURL} && \
-    apt-get remove -y wget && \
+    wget -q #{.CompilerURL} && \
     unzip kotlin-compiler-*.zip && \
+    apt-get remove -y wget unzip && \
+    apt-get autoremove -y && \
+    apt-get autoclean -y && \
     rm kotlin-compiler-*.zip && \
     rm -f kotlinc/bin/*.bat
 

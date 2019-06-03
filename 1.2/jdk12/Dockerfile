@@ -15,11 +15,12 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 RUN yum install -y wget unzip && \
     cd /usr/lib && \
-    wget https://github.com/JetBrains/kotlin/releases/download/v1.2.71/kotlin-compiler-1.2.71.zip && \
+    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.2.71/kotlin-compiler-1.2.71.zip && \
     unzip kotlin-compiler-*.zip && \
+    yum remove -y wget unzip && \
+    yum clean -y all && \
     rm kotlin-compiler-*.zip && \
-    rm -f kotlinc/bin/*.bat && \
-    yum remove -y wget unzip
+    rm -f kotlinc/bin/*.bat
 
 ENV PATH $PATH:/usr/lib/kotlinc/bin
 
