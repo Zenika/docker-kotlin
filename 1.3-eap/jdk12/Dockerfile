@@ -15,7 +15,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 RUN yum install -y wget unzip && \
     cd /usr/lib && \
-    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.40-eap-67/kotlin-compiler-1.3.40-eap-67.zip && \
+    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.40-eap-105/kotlin-compiler-1.3.40-eap-105.zip && \
     unzip kotlin-compiler-*.zip && \
     yum remove -y wget unzip && \
     yum clean -y all && \
