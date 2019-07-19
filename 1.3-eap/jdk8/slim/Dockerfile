@@ -16,7 +16,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN apt-get update && apt-get install -y --no-install-recommends wget unzip && \
     rm -rf /var/lib/apt/lists/* && \
     cd /usr/lib && \
-    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.40-eap-105/kotlin-compiler-1.3.40-eap-105.zip && \
+    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.50-eap-5/kotlin-compiler-1.3.50-eap-5.zip && \
     unzip kotlin-compiler-*.zip && \
     apt-get remove -y wget unzip && \
     apt-get autoremove -y && \
