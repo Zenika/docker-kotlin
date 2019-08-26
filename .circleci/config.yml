@@ -1,4 +1,8 @@
-version: 2
+version: 2.1
+executors:
+  docker-kotlin:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
 
 jobs:
 
@@ -16,15 +20,29 @@ jobs:
       - run: cp notify_kotlin_releases/current.json notify_kotlin_releases/previous.json
       - run: "git diff --exit-code --quiet -- notify_kotlin_releases/previous.json || (git add notify_kotlin_releases/previous.json && git config user.name $GITHUB_ACCOUNT && git config user.email $GITHUB_EMAIL && git commit -m \":pushpin: Update Kotlin previous releases\" && git push origin HEAD)"
 
+  build_1_3_jdk12:
+    executor: docker-kotlin
+    steps:
+      - checkout
+      - setup_remote_docker: 
+          docker_layer_caching: true
+      - run: "export CIRCLE_BUILD_DATE=$(date -Ins --utc)"
+      - run: "docker image build -t 1.3-jdk12 1.3/jdk12"
+
 workflows:
   version: 2
+
   notify_kotlin_releases:
     jobs:
       - notify_kotlin_releases
     triggers:
-     - schedule:
-         cron: "0 * * * *"
-         filters:
-           branches:
-             only:
-               - master
+      - schedule:
+          cron: "0 * * * *"
+          filters:
+            branches:
+              only:
+                - master
+
+  build:
+    jobs:
+      - build_1_3_jdk12
