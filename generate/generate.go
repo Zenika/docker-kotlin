@@ -270,11 +270,5 @@ func readTemplateFile(name, path string) (*template.Template, error) {
 }
 
 func ensureDir(dir string) error {
-	_, err := os.Stat(dir)
-
-	if os.IsNotExist(err) {
-		return os.MkdirAll(dir, 0755)
-	}
-
-	return err
+	return os.MkdirAll(dir, 0755)
 }
