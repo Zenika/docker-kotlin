@@ -28,6 +28,13 @@ jobs:
           docker_layer_caching: true
       - run: "export CIRCLE_BUILD_DATE=$(date -Ins --utc)"
       - run: docker image build -t 1.3-jdk12 1.3/jdk12
+
+  build_1_3_jdk12_test:
+    executor: docker-kotlin
+    steps:
+      - checkout
+      - setup_remote_docker: 
+          docker_layer_caching: true
       - run: docker image ls
 
 workflows:
@@ -47,3 +54,4 @@ workflows:
   build:
     jobs:
       - build_1_3_jdk12
+      - build_1_3_jdk12_test
