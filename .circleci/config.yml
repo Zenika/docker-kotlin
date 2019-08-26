@@ -54,6 +54,6 @@ workflows:
   build:
     jobs:
       - build_1_3_jdk12
-      - build_1_3_jdk12_test
+      - build_1_3_jdk12_test:
           requires:
             - build_1_3_jdk12
