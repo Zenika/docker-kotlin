@@ -1,4 +1,5 @@
 version: 2.1
+
 executors:
   docker-kotlin:
     docker:
@@ -24,7 +25,7 @@ jobs:
     executor: docker-kotlin
     steps:
       - checkout
-      - setup_remote_docker: 
+      - setup_remote_docker:
           docker_layer_caching: true
       - run: "export CIRCLE_BUILD_DATE=$(date -Ins --utc)"
       - run: docker image build -t 1.3-jdk12 1.3/jdk12
@@ -33,7 +34,24 @@ jobs:
     executor: docker-kotlin
     steps:
       - checkout
-      - setup_remote_docker: 
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: docker image ls
+
+  build_1_3_jdk11:
+    executor: docker-kotlin
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: "export CIRCLE_BUILD_DATE=$(date -Ins --utc)"
+      - run: docker image build -t 1.3-jdk11 1.3/jdk11
+
+  build_1_3_jdk11_test:
+    executor: docker-kotlin
+    steps:
+      - checkout
+      - setup_remote_docker:
           docker_layer_caching: true
       - run: docker image ls
 
@@ -53,6 +71,10 @@ workflows:
 
   build:
     jobs:
+      - build_1_3_jdk11
+      - build_1_3_jdk11_test:
+          requires:
+            - build_1_3_jdk11
       - build_1_3_jdk12
       - build_1_3_jdk12_test:
           requires:
