@@ -67,7 +67,7 @@ workflows:
           name: build_1_3_jdk12
           version: 1.3-jdk12
           build_context: 1.3/jdk12
-      - build_1_3_jdk12_test:
+      - list:
           requires:
             - build_1_3_jdk11
             - build_1_3_jdk12
