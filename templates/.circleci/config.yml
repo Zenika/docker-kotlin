@@ -1,9 +1,12 @@
 version: 2.1
 
-executors:
-  docker-kotlin:
+executors:#{range $_, $version := .Versions}#{range $_, $jdkVersion := $version.JDKVersions}
+  executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}:
     docker:
-      - image: circleci/buildpack-deps:stable-scm
+      - image: circleci/buildpack-deps:stable-scm#{range $_, $variant := $jdkVersion.Variants}
+  executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm#{end}#{end}#{end}
 
 jobs:
 
@@ -22,12 +25,14 @@ jobs:
       - run: "git diff --exit-code --quiet -- notify_kotlin_releases/previous.json || (git add notify_kotlin_releases/previous.json && git config user.name $GITHUB_ACCOUNT && git config user.email $GITHUB_EMAIL && git commit -m \":pushpin: Update Kotlin previous releases\" && git push origin HEAD)"
   
   build:
-    executor: docker-kotlin
     parameters:
       version:
         type: string
       build_context:
         type: string
+      executor:
+        type: executor
+    executor: << parameters.executor >>
     steps:
       - checkout
       - setup_remote_docker:
@@ -36,9 +41,11 @@ jobs:
       - run: docker image build -t docker-kotlin:<< parameters.version >> << parameters.build_context >>
 
   list:
-    executor: docker-kotlin
+    parameters:
+      executor:
+        type: executor
+    executor: << parameters.executor >>
     steps:
-      - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker image ls
@@ -62,12 +69,20 @@ workflows:
       - build:
           name: build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}
           version: #{$version.Version}-jdk#{$jdkVersion.JDKVersion}
-          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}#{range $_, $variant := $jdkVersion.Variants}
+          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}
+          executor: executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}#{range $_, $variant := $jdkVersion.Variants}
       - build:
           name: build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}
           version: #{$version.Version}-jdk#{$jdkVersion.JDKVersion}-#{$variant.Base}
-          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}#{end}#{end}#{end}
+          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}
+          executor: executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}#{end}#{end}#{end}#{range $_, $version := .Versions}#{range $_, $jdkVersion := $version.JDKVersions}
       - list:
-          requires:#{range $_, $version := .Versions}#{range $_, $jdkVersion := $version.JDKVersions}
+          name: list_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}
+          executor: executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}
+          requires:
             - build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}#{range $_, $variant := $jdkVersion.Variants}
+      - list:
+          name: list_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}
+          executor: executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}
+          requires:
             - build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}#{end}#{end}#{end}

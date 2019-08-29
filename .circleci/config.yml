@@ -1,7 +1,85 @@
 version: 2.1
 
 executors:
-  docker-kotlin:
+  executor_1_3_jdk12:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_3_jdk12_alpine:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_3_jdk11:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_3_jdk11_slim:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_3_jdk10:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_3_jdk10_slim:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_3_jdk8:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_3_jdk8_alpine:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_3_jdk8_slim:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk12:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk12_alpine:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk11:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk11_slim:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk10:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk10_slim:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk8:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk8_alpine:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_2_jdk8_slim:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk12:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk12_alpine:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk11:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk11_slim:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk10:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk10_slim:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk8:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk8_alpine:
+    docker:
+      - image: circleci/buildpack-deps:stable-scm
+  executor_1_1_jdk8_slim:
     docker:
       - image: circleci/buildpack-deps:stable-scm
 
@@ -22,12 +100,14 @@ jobs:
       - run: "git diff --exit-code --quiet -- notify_kotlin_releases/previous.json || (git add notify_kotlin_releases/previous.json && git config user.name $GITHUB_ACCOUNT && git config user.email $GITHUB_EMAIL && git commit -m \":pushpin: Update Kotlin previous releases\" && git push origin HEAD)"
   
   build:
-    executor: docker-kotlin
     parameters:
       version:
         type: string
       build_context:
         type: string
+      executor:
+        type: executor
+    executor: << parameters.executor >>
     steps:
       - checkout
       - setup_remote_docker:
@@ -36,9 +116,11 @@ jobs:
       - run: docker image build -t docker-kotlin:<< parameters.version >> << parameters.build_context >>
 
   list:
-    executor: docker-kotlin
+    parameters:
+      executor:
+        type: executor
+    executor: << parameters.executor >>
     steps:
-      - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker image ls
@@ -63,136 +145,269 @@ workflows:
           name: build_1_3_jdk12
           version: 1.3-jdk12
           build_context: 1.3/jdk12
+          executor: executor_1_3_jdk12
       - build:
           name: build_1_3_jdk12_alpine
           version: 1.3-jdk12-alpine
           build_context: 1.3/jdk12/alpine
+          executor: executor_1_3_jdk12_alpine
       - build:
           name: build_1_3_jdk11
           version: 1.3-jdk11
           build_context: 1.3/jdk11
+          executor: executor_1_3_jdk11
       - build:
           name: build_1_3_jdk11_slim
           version: 1.3-jdk11-slim
           build_context: 1.3/jdk11/slim
+          executor: executor_1_3_jdk11_slim
       - build:
           name: build_1_3_jdk10
           version: 1.3-jdk10
           build_context: 1.3/jdk10
+          executor: executor_1_3_jdk10
       - build:
           name: build_1_3_jdk10_slim
           version: 1.3-jdk10-slim
           build_context: 1.3/jdk10/slim
+          executor: executor_1_3_jdk10_slim
       - build:
           name: build_1_3_jdk8
           version: 1.3-jdk8
           build_context: 1.3/jdk8
+          executor: executor_1_3_jdk8
       - build:
           name: build_1_3_jdk8_alpine
           version: 1.3-jdk8-alpine
           build_context: 1.3/jdk8/alpine
+          executor: executor_1_3_jdk8_alpine
       - build:
           name: build_1_3_jdk8_slim
           version: 1.3-jdk8-slim
           build_context: 1.3/jdk8/slim
+          executor: executor_1_3_jdk8_slim
       - build:
           name: build_1_2_jdk12
           version: 1.2-jdk12
           build_context: 1.2/jdk12
+          executor: executor_1_2_jdk12
       - build:
           name: build_1_2_jdk12_alpine
           version: 1.2-jdk12-alpine
           build_context: 1.2/jdk12/alpine
+          executor: executor_1_2_jdk12_alpine
       - build:
           name: build_1_2_jdk11
           version: 1.2-jdk11
           build_context: 1.2/jdk11
+          executor: executor_1_2_jdk11
       - build:
           name: build_1_2_jdk11_slim
           version: 1.2-jdk11-slim
           build_context: 1.2/jdk11/slim
+          executor: executor_1_2_jdk11_slim
       - build:
           name: build_1_2_jdk10
           version: 1.2-jdk10
           build_context: 1.2/jdk10
+          executor: executor_1_2_jdk10
       - build:
           name: build_1_2_jdk10_slim
           version: 1.2-jdk10-slim
           build_context: 1.2/jdk10/slim
+          executor: executor_1_2_jdk10_slim
       - build:
           name: build_1_2_jdk8
           version: 1.2-jdk8
           build_context: 1.2/jdk8
+          executor: executor_1_2_jdk8
       - build:
           name: build_1_2_jdk8_alpine
           version: 1.2-jdk8-alpine
           build_context: 1.2/jdk8/alpine
+          executor: executor_1_2_jdk8_alpine
       - build:
           name: build_1_2_jdk8_slim
           version: 1.2-jdk8-slim
           build_context: 1.2/jdk8/slim
+          executor: executor_1_2_jdk8_slim
       - build:
           name: build_1_1_jdk12
           version: 1.1-jdk12
           build_context: 1.1/jdk12
+          executor: executor_1_1_jdk12
       - build:
           name: build_1_1_jdk12_alpine
           version: 1.1-jdk12-alpine
           build_context: 1.1/jdk12/alpine
+          executor: executor_1_1_jdk12_alpine
       - build:
           name: build_1_1_jdk11
           version: 1.1-jdk11
           build_context: 1.1/jdk11
+          executor: executor_1_1_jdk11
       - build:
           name: build_1_1_jdk11_slim
           version: 1.1-jdk11-slim
           build_context: 1.1/jdk11/slim
+          executor: executor_1_1_jdk11_slim
       - build:
           name: build_1_1_jdk10
           version: 1.1-jdk10
           build_context: 1.1/jdk10
+          executor: executor_1_1_jdk10
       - build:
           name: build_1_1_jdk10_slim
           version: 1.1-jdk10-slim
           build_context: 1.1/jdk10/slim
+          executor: executor_1_1_jdk10_slim
       - build:
           name: build_1_1_jdk8
           version: 1.1-jdk8
           build_context: 1.1/jdk8
+          executor: executor_1_1_jdk8
       - build:
           name: build_1_1_jdk8_alpine
           version: 1.1-jdk8-alpine
           build_context: 1.1/jdk8/alpine
+          executor: executor_1_1_jdk8_alpine
       - build:
           name: build_1_1_jdk8_slim
           version: 1.1-jdk8-slim
           build_context: 1.1/jdk8/slim
+          executor: executor_1_1_jdk8_slim
       - list:
+          name: list_1_3_jdk12
+          executor: executor_1_3_jdk12
           requires:
             - build_1_3_jdk12
+      - list:
+          name: list_1_3_jdk12_alpine
+          executor: executor_1_3_jdk12_alpine
+          requires:
             - build_1_3_jdk12_alpine
+      - list:
+          name: list_1_3_jdk11
+          executor: executor_1_3_jdk11
+          requires:
             - build_1_3_jdk11
+      - list:
+          name: list_1_3_jdk11_slim
+          executor: executor_1_3_jdk11_slim
+          requires:
             - build_1_3_jdk11_slim
+      - list:
+          name: list_1_3_jdk10
+          executor: executor_1_3_jdk10
+          requires:
             - build_1_3_jdk10
+      - list:
+          name: list_1_3_jdk10_slim
+          executor: executor_1_3_jdk10_slim
+          requires:
             - build_1_3_jdk10_slim
+      - list:
+          name: list_1_3_jdk8
+          executor: executor_1_3_jdk8
+          requires:
             - build_1_3_jdk8
+      - list:
+          name: list_1_3_jdk8_alpine
+          executor: executor_1_3_jdk8_alpine
+          requires:
             - build_1_3_jdk8_alpine
+      - list:
+          name: list_1_3_jdk8_slim
+          executor: executor_1_3_jdk8_slim
+          requires:
             - build_1_3_jdk8_slim
+      - list:
+          name: list_1_2_jdk12
+          executor: executor_1_2_jdk12
+          requires:
             - build_1_2_jdk12
+      - list:
+          name: list_1_2_jdk12_alpine
+          executor: executor_1_2_jdk12_alpine
+          requires:
             - build_1_2_jdk12_alpine
+      - list:
+          name: list_1_2_jdk11
+          executor: executor_1_2_jdk11
+          requires:
             - build_1_2_jdk11
+      - list:
+          name: list_1_2_jdk11_slim
+          executor: executor_1_2_jdk11_slim
+          requires:
             - build_1_2_jdk11_slim
+      - list:
+          name: list_1_2_jdk10
+          executor: executor_1_2_jdk10
+          requires:
             - build_1_2_jdk10
+      - list:
+          name: list_1_2_jdk10_slim
+          executor: executor_1_2_jdk10_slim
+          requires:
             - build_1_2_jdk10_slim
+      - list:
+          name: list_1_2_jdk8
+          executor: executor_1_2_jdk8
+          requires:
             - build_1_2_jdk8
+      - list:
+          name: list_1_2_jdk8_alpine
+          executor: executor_1_2_jdk8_alpine
+          requires:
             - build_1_2_jdk8_alpine
+      - list:
+          name: list_1_2_jdk8_slim
+          executor: executor_1_2_jdk8_slim
+          requires:
             - build_1_2_jdk8_slim
+      - list:
+          name: list_1_1_jdk12
+          executor: executor_1_1_jdk12
+          requires:
             - build_1_1_jdk12
+      - list:
+          name: list_1_1_jdk12_alpine
+          executor: executor_1_1_jdk12_alpine
+          requires:
             - build_1_1_jdk12_alpine
+      - list:
+          name: list_1_1_jdk11
+          executor: executor_1_1_jdk11
+          requires:
             - build_1_1_jdk11
+      - list:
+          name: list_1_1_jdk11_slim
+          executor: executor_1_1_jdk11_slim
+          requires:
             - build_1_1_jdk11_slim
+      - list:
+          name: list_1_1_jdk10
+          executor: executor_1_1_jdk10
+          requires:
             - build_1_1_jdk10
+      - list:
+          name: list_1_1_jdk10_slim
+          executor: executor_1_1_jdk10_slim
+          requires:
             - build_1_1_jdk10_slim
+      - list:
+          name: list_1_1_jdk8
+          executor: executor_1_1_jdk8
+          requires:
             - build_1_1_jdk8
+      - list:
+          name: list_1_1_jdk8_alpine
+          executor: executor_1_1_jdk8_alpine
+          requires:
             - build_1_1_jdk8_alpine
+      - list:
+          name: list_1_1_jdk8_slim
+          executor: executor_1_1_jdk8_slim
+          requires:
             - build_1_1_jdk8_slim
