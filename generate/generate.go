@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"text/template"
 
@@ -21,6 +22,11 @@ type Version struct {
 	Version     string
 	CompilerURL string
 	JDKVersions []JDKVersion
+}
+
+// VersionSnakeCased returns v.Version snake-cased
+func (v Version) VersionSnakeCased() string {
+	return string(regexp.MustCompile("\\W").ReplaceAll(([]byte)(v.Version), ([]byte)("_")))
 }
 
 // JDKVersion contains information about a JDK version
@@ -54,12 +60,28 @@ type Context struct {
 }
 
 var (
-	config         Config
-	readmeTemplate *template.Template
-	templates      = make(map[string][]*template.Template)
-	templatesDir   string
-	wd             string
+	config           Config
+	readmeTemplate   *template.Template
+	circleciTemplate *template.Template
+	templates        = make(map[string][]*template.Template)
+	templatesDir     string
+	wd               string
 )
+
+func main() {
+	if err := initTemplatesDir(); err != nil {
+		panic(err)
+	}
+	if err := loadConfig(); err != nil {
+		panic(err)
+	}
+	if err := loadAllTemplates(); err != nil {
+		panic(err)
+	}
+	if err := generateAll(); err != nil {
+		panic(err)
+	}
+}
 
 func contextWithVersion(version Version) Context {
 	return Context{Wd: filepath.Join(wd, version.Version), Version: version.Version, CompilerURL: version.CompilerURL}
@@ -80,46 +102,39 @@ func (ctxt Context) withBase(base Base, isDefault bool) Context {
 	return ctxt
 }
 
-func init() {
+func initTemplatesDir() error {
 	var err error
 	if wd, err = os.Getwd(); err != nil {
-		panic(err)
+		return err
 	}
 	templatesDir = filepath.Join(wd, "templates")
+	return nil
 }
 
-func init() {
+func loadConfig() error {
 	viper.AddConfigPath(filepath.Join(wd))
 	viper.SetConfigName("versions")
 
 	if err := viper.ReadInConfig(); err != nil {
-		panic(err)
+		return err
 	}
 
-	viper.Unmarshal(&config)
+	return viper.Unmarshal(&config)
 }
 
-func init() {
-	if err := loadTemplates(); err != nil {
-		panic(err)
-	}
-}
-
-func init() {
-	if err := loadReadmeTemplate(); err != nil {
-		panic(err)
-	}
-}
-
-func main() {
+func generateAll() error {
 	for _, version := range config.Versions {
 		if err := generateVersion(version); err != nil {
-			panic(err)
+			return err
 		}
 	}
 	if err := generateReadme(); err != nil {
-		panic(err)
+		return err
 	}
+	if err := generateCircleci(); err != nil {
+		return err
+	}
+	return nil
 }
 
 func generateVersion(version Version) error {
@@ -189,6 +204,10 @@ func generateReadme() error {
 	return generateTemplate(readmeTemplate, config, wd)
 }
 
+func generateCircleci() error {
+	return generateTemplate(circleciTemplate, config, wd)
+}
+
 func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
 	fName := filepath.Join(outDir, t.Name())
 
@@ -209,9 +228,22 @@ func generateTemplate(t *template.Template, ctxt interface{}, outDir string) err
 	return nil
 }
 
-func loadTemplates() error {
+func loadAllTemplates() error {
+	if err := loadVersionsTemplates(); err != nil {
+		return err
+	}
+	if err := loadReadmeTemplate(); err != nil {
+		return err
+	}
+	if err := loadCircleciTemplate(); err != nil {
+		return err
+	}
+	return nil
+}
+
+func loadVersionsTemplates() error {
 	for _, base := range config.Bases {
-		if err := loadTemplate(base); err != nil {
+		if err := loadVersionTemplate(base); err != nil {
 			return err
 		}
 	}
@@ -219,7 +251,7 @@ func loadTemplates() error {
 	return nil
 }
 
-func loadTemplate(base string) error {
+func loadVersionTemplate(base string) error {
 	baseDir := filepath.Join(templatesDir, base)
 
 	return filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
@@ -250,6 +282,12 @@ func loadTemplate(base string) error {
 func loadReadmeTemplate() error {
 	var err error
 	readmeTemplate, err = readTemplateFile("README.md", filepath.Join(templatesDir, "README.md"))
+	return err
+}
+
+func loadCircleciTemplate() error {
+	var err error
+	circleciTemplate, err = readTemplateFile(".circleci/config.yml", filepath.Join(templatesDir, ".circleci/config.yml"))
 	return err
 }
 
