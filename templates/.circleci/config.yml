@@ -33,7 +33,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: "export CIRCLE_BUILD_DATE=$(date -Ins --utc)"
-      - run: docker image build -t docker-kotlin:<< parameters.version >> << parameters.build_context >>
+      - run: export VERSION=<< parameters.version >>
+      - run: export BUILD_CONTEXT=<< parameters.build_context >>
+      - run: ./scripts/build.sh
 
 workflows:
   version: 2
