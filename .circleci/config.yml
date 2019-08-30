@@ -35,7 +35,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - run: "export CIRCLE_BUILD_DATE=$(date -Ins --utc)"
       - run: ./scripts/build.sh
 
 workflows:
