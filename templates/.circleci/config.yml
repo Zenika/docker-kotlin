@@ -1,12 +1,9 @@
 version: 2.1
 
-executors:#{range $_, $version := .Versions}#{range $_, $jdkVersion := $version.JDKVersions}
-  executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}:
+executors:
+  docker_builder:
     docker:
-      - image: circleci/buildpack-deps:stable-scm#{range $_, $variant := $jdkVersion.Variants}
-  executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}:
-    docker:
-      - image: circleci/buildpack-deps:stable-scm#{end}#{end}#{end}
+      - image: circleci/buildpack-deps:stable-scm
 
 jobs:
 
@@ -30,25 +27,13 @@ jobs:
         type: string
       build_context:
         type: string
-      e:
-        type: executor
-    executor: << parameters.e >>
+    executor: docker_builder
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run: "export CIRCLE_BUILD_DATE=$(date -Ins --utc)"
       - run: docker image build -t docker-kotlin:<< parameters.version >> << parameters.build_context >>
-
-  list:
-    parameters:
-      e:
-        type: executor
-    executor: << parameters.e >>
-    steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: docker image ls
 
 workflows:
   version: 2
@@ -69,20 +54,8 @@ workflows:
       - build:
           name: build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}
           version: #{$version.Version}-jdk#{$jdkVersion.JDKVersion}
-          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}
-          e: executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}#{range $_, $variant := $jdkVersion.Variants}
+          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}#{range $_, $variant := $jdkVersion.Variants}
       - build:
           name: build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}
           version: #{$version.Version}-jdk#{$jdkVersion.JDKVersion}-#{$variant.Base}
-          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}
-          e: executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}#{end}#{end}#{end}#{range $_, $version := .Versions}#{range $_, $jdkVersion := $version.JDKVersions}
-      - list:
-          name: list_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}
-          e: executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}
-          requires:
-            - build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}#{range $_, $variant := $jdkVersion.Variants}
-      - list:
-          name: list_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}
-          e: executor_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}
-          requires:
-            - build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}#{end}#{end}#{end}
+          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}#{end}#{end}#{end}
