@@ -35,7 +35,9 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - run: ./scripts/build.sh
+      - run:
+          name: Build image zenika/kotlin:<< parameters.version >>
+          command: ./scripts/build.sh
 
 workflows:
   version: 2
