@@ -65,4 +65,4 @@ workflows:
           name: #{$b.Name}
           tag: #{$b.Tag}
           build_context: #{$b.BuildContext}
-          additional_tags: #{join $b.AdditionalTags ","}#{end}
+          additional_tags: #{join $b.AdditionalTags " "}#{end}

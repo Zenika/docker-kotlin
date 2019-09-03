@@ -65,47 +65,47 @@ workflows:
           name: build_1_3_jdk12
           tag: zenika/kotlin:1.3-jdk12
           build_context: 1.3/jdk12
-          additional_tags: zenika/kotlin:jdk12,zenika/kotlin:1-jdk12,zenika/kotlin:1.3.50-jdk12
+          additional_tags: zenika/kotlin:jdk12 zenika/kotlin:1-jdk12 zenika/kotlin:1.3.50-jdk12
       - build:
           name: build_1_3_jdk12_alpine
           tag: zenika/kotlin:1.3-jdk12-alpine
           build_context: 1.3/jdk12/alpine
-          additional_tags: zenika/kotlin:jdk12-alpine,zenika/kotlin:1-jdk12-alpine,zenika/kotlin:1.3.50-jdk12-alpine,zenika/alpine-kotlin:jdk12,zenika/alpine-kotlin:1-jdk12,zenika/alpine-kotlin:1.3-jdk12,zenika/alpine-kotlin:1.3.50-jdk12
+          additional_tags: zenika/kotlin:jdk12-alpine zenika/kotlin:1-jdk12-alpine zenika/kotlin:1.3.50-jdk12-alpine zenika/alpine-kotlin:jdk12 zenika/alpine-kotlin:1-jdk12 zenika/alpine-kotlin:1.3-jdk12 zenika/alpine-kotlin:1.3.50-jdk12
       - build:
           name: build_1_3_jdk11
           tag: zenika/kotlin:1.3-jdk11
           build_context: 1.3/jdk11
-          additional_tags: zenika/kotlin:latest,zenika/kotlin:1,zenika/kotlin:1.3,zenika/kotlin:1.3.50,zenika/kotlin:jdk11,zenika/kotlin:1-jdk11,zenika/kotlin:1.3.50-jdk11
+          additional_tags: zenika/kotlin:latest zenika/kotlin:1 zenika/kotlin:1.3 zenika/kotlin:1.3.50 zenika/kotlin:jdk11 zenika/kotlin:1-jdk11 zenika/kotlin:1.3.50-jdk11
       - build:
           name: build_1_3_jdk11_slim
           tag: zenika/kotlin:1.3-jdk11-slim
           build_context: 1.3/jdk11/slim
-          additional_tags: zenika/kotlin:slim,zenika/kotlin:1-slim,zenika/kotlin:1.3-slim,zenika/kotlin:1.3.50-slim,zenika/kotlin:jdk11-slim,zenika/kotlin:1-jdk11-slim,zenika/kotlin:1.3.50-jdk11-slim
+          additional_tags: zenika/kotlin:slim zenika/kotlin:1-slim zenika/kotlin:1.3-slim zenika/kotlin:1.3.50-slim zenika/kotlin:jdk11-slim zenika/kotlin:1-jdk11-slim zenika/kotlin:1.3.50-jdk11-slim
       - build:
           name: build_1_3_jdk10
           tag: zenika/kotlin:1.3-jdk10
           build_context: 1.3/jdk10
-          additional_tags: zenika/kotlin:jdk10,zenika/kotlin:1-jdk10,zenika/kotlin:1.3.50-jdk10
+          additional_tags: zenika/kotlin:jdk10 zenika/kotlin:1-jdk10 zenika/kotlin:1.3.50-jdk10
       - build:
           name: build_1_3_jdk10_slim
           tag: zenika/kotlin:1.3-jdk10-slim
           build_context: 1.3/jdk10/slim
-          additional_tags: zenika/kotlin:jdk10-slim,zenika/kotlin:1-jdk10-slim,zenika/kotlin:1.3.50-jdk10-slim
+          additional_tags: zenika/kotlin:jdk10-slim zenika/kotlin:1-jdk10-slim zenika/kotlin:1.3.50-jdk10-slim
       - build:
           name: build_1_3_jdk8
           tag: zenika/kotlin:1.3-jdk8
           build_context: 1.3/jdk8
-          additional_tags: zenika/kotlin:jdk8,zenika/kotlin:1-jdk8,zenika/kotlin:1.3.50-jdk8
+          additional_tags: zenika/kotlin:jdk8 zenika/kotlin:1-jdk8 zenika/kotlin:1.3.50-jdk8
       - build:
           name: build_1_3_jdk8_alpine
           tag: zenika/kotlin:1.3-jdk8-alpine
           build_context: 1.3/jdk8/alpine
-          additional_tags: zenika/kotlin:alpine,zenika/kotlin:jdk8-alpine,zenika/kotlin:1-alpine,zenika/kotlin:1-jdk8-alpine,zenika/kotlin:1.3.50-jdk8-alpine,zenika/kotlin:1.3-alpine,zenika/kotlin:1.3.50-alpine,zenika/alpine-kotlin:latest,zenika/alpine-kotlin:jdk8,zenika/alpine-kotlin:1,zenika/alpine-kotlin:1-jdk8,zenika/alpine-kotlin:1.3,zenika/alpine-kotlin:1.3-jdk8,zenika/alpine-kotlin:1.3.50,zenika/alpine-kotlin:1.3.50-jdk8
+          additional_tags: zenika/kotlin:alpine zenika/kotlin:jdk8-alpine zenika/kotlin:1-alpine zenika/kotlin:1-jdk8-alpine zenika/kotlin:1.3.50-jdk8-alpine zenika/kotlin:1.3-alpine zenika/kotlin:1.3.50-alpine zenika/alpine-kotlin:latest zenika/alpine-kotlin:jdk8 zenika/alpine-kotlin:1 zenika/alpine-kotlin:1-jdk8 zenika/alpine-kotlin:1.3 zenika/alpine-kotlin:1.3-jdk8 zenika/alpine-kotlin:1.3.50 zenika/alpine-kotlin:1.3.50-jdk8
       - build:
           name: build_1_3_jdk8_slim
           tag: zenika/kotlin:1.3-jdk8-slim
           build_context: 1.3/jdk8/slim
-          additional_tags: zenika/kotlin:jdk8-slim,zenika/kotlin:1-jdk8-slim,zenika/kotlin:1.3.50-jdk8-slim
+          additional_tags: zenika/kotlin:jdk8-slim zenika/kotlin:1-jdk8-slim zenika/kotlin:1.3.50-jdk8-slim
       - build:
           name: build_1_2_jdk12
           tag: zenika/kotlin:1.2-jdk12
@@ -115,17 +115,17 @@ workflows:
           name: build_1_2_jdk12_alpine
           tag: zenika/kotlin:1.2-jdk12-alpine
           build_context: 1.2/jdk12/alpine
-          additional_tags: zenika/kotlin:1.2.71-jdk12-alpine,zenika/alpine-kotlin:1.2-jdk12,zenika/alpine-kotlin:1.2.71-jdk12
+          additional_tags: zenika/kotlin:1.2.71-jdk12-alpine zenika/alpine-kotlin:1.2-jdk12 zenika/alpine-kotlin:1.2.71-jdk12
       - build:
           name: build_1_2_jdk11
           tag: zenika/kotlin:1.2-jdk11
           build_context: 1.2/jdk11
-          additional_tags: zenika/kotlin:1.2,zenika/kotlin:1.2.71,zenika/kotlin:1.2.71-jdk11
+          additional_tags: zenika/kotlin:1.2 zenika/kotlin:1.2.71 zenika/kotlin:1.2.71-jdk11
       - build:
           name: build_1_2_jdk11_slim
           tag: zenika/kotlin:1.2-jdk11-slim
           build_context: 1.2/jdk11/slim
-          additional_tags: zenika/kotlin:1.2-slim,zenika/kotlin:1.2.71-slim,zenika/kotlin:1.2.71-jdk11-slim
+          additional_tags: zenika/kotlin:1.2-slim zenika/kotlin:1.2.71-slim zenika/kotlin:1.2.71-jdk11-slim
       - build:
           name: build_1_2_jdk10
           tag: zenika/kotlin:1.2-jdk10
@@ -145,7 +145,7 @@ workflows:
           name: build_1_2_jdk8_alpine
           tag: zenika/kotlin:1.2-jdk8-alpine
           build_context: 1.2/jdk8/alpine
-          additional_tags: zenika/kotlin:1.2-alpine,zenika/kotlin:1.2.71-alpine,zenika/kotlin:1.2.71-jdk8-alpine,zenika/alpine-kotlin:1.2,zenika/alpine-kotlin:1.2-jdk8,zenika/alpine-kotlin:1.2.71,zenika/alpine-kotlin:1.2.71-jdk8
+          additional_tags: zenika/kotlin:1.2-alpine zenika/kotlin:1.2.71-alpine zenika/kotlin:1.2.71-jdk8-alpine zenika/alpine-kotlin:1.2 zenika/alpine-kotlin:1.2-jdk8 zenika/alpine-kotlin:1.2.71 zenika/alpine-kotlin:1.2.71-jdk8
       - build:
           name: build_1_2_jdk8_slim
           tag: zenika/kotlin:1.2-jdk8-slim
@@ -160,17 +160,17 @@ workflows:
           name: build_1_1_jdk12_alpine
           tag: zenika/kotlin:1.1-jdk12-alpine
           build_context: 1.1/jdk12/alpine
-          additional_tags: zenika/kotlin:1.1.61-jdk12-alpine,zenika/alpine-kotlin:1.1-jdk12,zenika/alpine-kotlin:1.1.61-jdk12
+          additional_tags: zenika/kotlin:1.1.61-jdk12-alpine zenika/alpine-kotlin:1.1-jdk12 zenika/alpine-kotlin:1.1.61-jdk12
       - build:
           name: build_1_1_jdk11
           tag: zenika/kotlin:1.1-jdk11
           build_context: 1.1/jdk11
-          additional_tags: zenika/kotlin:1.1,zenika/kotlin:1.1.61,zenika/kotlin:1.1.61-jdk11
+          additional_tags: zenika/kotlin:1.1 zenika/kotlin:1.1.61 zenika/kotlin:1.1.61-jdk11
       - build:
           name: build_1_1_jdk11_slim
           tag: zenika/kotlin:1.1-jdk11-slim
           build_context: 1.1/jdk11/slim
-          additional_tags: zenika/kotlin:1.1-slim,zenika/kotlin:1.1.61-slim,zenika/kotlin:1.1.61-jdk11-slim
+          additional_tags: zenika/kotlin:1.1-slim zenika/kotlin:1.1.61-slim zenika/kotlin:1.1.61-jdk11-slim
       - build:
           name: build_1_1_jdk10
           tag: zenika/kotlin:1.1-jdk10
@@ -190,7 +190,7 @@ workflows:
           name: build_1_1_jdk8_alpine
           tag: zenika/kotlin:1.1-jdk8-alpine
           build_context: 1.1/jdk8/alpine
-          additional_tags: zenika/kotlin:1.1-alpine,zenika/kotlin:1.1.61-alpine,zenika/kotlin:1.1.61-jdk8-alpine,zenika/alpine-kotlin:1.1,zenika/alpine-kotlin:1.1-jdk8,zenika/alpine-kotlin:1.1.61,zenika/alpine-kotlin:1.1.61-jdk8
+          additional_tags: zenika/kotlin:1.1-alpine zenika/kotlin:1.1.61-alpine zenika/kotlin:1.1.61-jdk8-alpine zenika/alpine-kotlin:1.1 zenika/alpine-kotlin:1.1-jdk8 zenika/alpine-kotlin:1.1.61 zenika/alpine-kotlin:1.1.61-jdk8
       - build:
           name: build_1_1_jdk8_slim
           tag: zenika/kotlin:1.1-jdk8-slim
