@@ -9,5 +9,3 @@ docker image build \
   --build-arg COMPILER_URL=$COMPILER_URL \
   --build-arg CIRCLE_BUILD_DATE=$(date -Ins --utc) \
   $BUILD_CONTEXT
-
-docker image inspect $TAG

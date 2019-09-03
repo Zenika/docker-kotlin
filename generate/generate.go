@@ -13,10 +13,10 @@ import (
 
 // Config contains information about the different versions
 type Config struct {
-	Bases    []string
 	Versions []Version
 }
 
+// Builds lists all builds
 func (c Config) Builds() (builds []Build) {
 	for _, v := range c.Versions {
 		builds = append(builds, v.Builds()...)
@@ -36,6 +36,7 @@ func (v Version) VersionSnakeCased() string {
 	return string(regexp.MustCompile("\\W").ReplaceAll(([]byte)(v.Version), ([]byte)("_")))
 }
 
+// Builds lists builds for this Version
 func (v Version) Builds() (builds []Build) {
 	for _, jdkVersion := range v.JDKVersions {
 		builds = append(builds, Build{v, jdkVersion, jdkVersion.Base})
@@ -91,6 +92,7 @@ func (b Build) Tag() (t string) {
 	return
 }
 
+// Source is build's source image
 func (b Build) Source() (s string) {
 	s = "openjdk:" + b.JDKVersion.JDKVersion + "-jdk"
 	if b.JDKVersion.Base.Base != b.Base.Base {
@@ -121,7 +123,6 @@ var (
 	config           Config
 	readmeTemplate   *template.Template
 	circleciTemplate *template.Template
-	templates        = make(map[string][]*template.Template)
 	templatesDir     string
 	wd               string
 )
@@ -130,10 +131,10 @@ func main() {
 	if err := initTemplatesDir(); err != nil {
 		panic(err)
 	}
-	if err := loadConfig(); err != nil {
+	if err := loadAllTemplates(); err != nil {
 		panic(err)
 	}
-	if err := loadAllTemplates(); err != nil {
+	if err := loadVersions(); err != nil {
 		panic(err)
 	}
 	if err := generateAll(); err != nil {
@@ -150,7 +151,7 @@ func initTemplatesDir() error {
 	return nil
 }
 
-func loadConfig() error {
+func loadVersions() error {
 	viper.AddConfigPath(filepath.Join(wd))
 	viper.SetConfigName("versions")
 
@@ -181,10 +182,6 @@ func generateCircleci() error {
 
 func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
 	fName := filepath.Join(outDir, t.Name())
-
-	if err := ensureDir(filepath.Dir(fName)); err != nil {
-		return err
-	}
 
 	f, err := os.Create(fName)
 	if err != nil {
@@ -235,8 +232,4 @@ func readTemplateFile(name, path string) (*template.Template, error) {
 	t = template.Must(t.Parse(string(s)))
 
 	return t, nil
-}
-
-func ensureDir(dir string) error {
-	return os.MkdirAll(dir, 0755)
 }
