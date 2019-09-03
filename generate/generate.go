@@ -91,22 +91,17 @@ func (b Build) Tag() (t string) {
 	return
 }
 
-// FullTag is build's main tag with image name
-func (b Build) FullTag() string {
-	return "zenika/kotlin:" + b.Tag()
-}
-
-// BuildContext is build's build context
-func (b Build) BuildContext() (bc string) {
-	bc = filepath.Join(b.Version.Version, "jdk"+b.JDKVersion.JDKVersion)
+func (b Build) Source() (s string) {
+	s = "openjdk:" + b.JDKVersion.JDKVersion + "-jdk"
 	if b.JDKVersion.Base.Base != b.Base.Base {
-		bc = filepath.Join(bc, b.Base.Base)
+		s += "-" + b.Base.Base
 	}
 	return
 }
 
-func (b Build) Wd() string {
-	return filepath.Join(wd, b.BuildContext())
+// FullTag is build's main tag with image name
+func (b Build) FullTag() string {
+	return "zenika/kotlin:" + b.Tag()
 }
 
 // AdditionalTags is build's additional tags
@@ -167,31 +162,12 @@ func loadConfig() error {
 }
 
 func generateAll() error {
-	for _, b := range config.Builds() {
-		if err := generateBuild(b); err != nil {
-			return err
-		}
-	}
 	if err := generateReadme(); err != nil {
 		return err
 	}
 	if err := generateCircleci(); err != nil {
 		return err
 	}
-	return nil
-}
-
-func generateBuild(b Build) error {
-	if err := ensureDir(b.Wd()); err != nil {
-		return err
-	}
-
-	for _, t := range templates[b.Base.Base] {
-		if err := generateTemplate(t, b, b.Wd()); err != nil {
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -224,9 +200,6 @@ func generateTemplate(t *template.Template, ctxt interface{}, outDir string) err
 }
 
 func loadAllTemplates() error {
-	if err := loadBasesTemplates(); err != nil {
-		return err
-	}
 	if err := loadReadmeTemplate(); err != nil {
 		return err
 	}
@@ -234,44 +207,6 @@ func loadAllTemplates() error {
 		return err
 	}
 	return nil
-}
-
-func loadBasesTemplates() error {
-	for _, base := range config.Bases {
-		if err := loadBaseTemplate(base); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func loadBaseTemplate(base string) error {
-	baseDir := filepath.Join(templatesDir, base)
-
-	return filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-
-		if info.IsDir() {
-			return nil
-		}
-
-		relPath, err := filepath.Rel(baseDir, path)
-		if err != nil {
-			return err
-		}
-
-		t, err := readTemplateFile(relPath, path)
-		if err != nil {
-			return err
-		}
-
-		templates[base] = append(templates[base], t)
-
-		return nil
-	})
 }
 
 func loadReadmeTemplate() error {

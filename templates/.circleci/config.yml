@@ -27,12 +27,18 @@ jobs:
         type: string
       build_context:
         type: string
+      source:
+        type: string
+      compiler_url:
+        type: string
       additional_tags:
         type: string
     executor: docker_builder
     environment:
       TAG: << parameters.tag >>
       BUILD_CONTEXT: << parameters.build_context >>
+      SOURCE: << parameters.source >>
+      COMPILER_URL: << parameters.compiler_url >>
       ADDITIONAL_TAGS: << parameters.additional_tags >>
     steps:
       - checkout
@@ -64,5 +70,7 @@ workflows:
       - build:
           name: #{$b.Name}
           tag: #{$b.FullTag}
-          build_context: #{$b.BuildContext}
+          build_context: #{$b.Base.Base}
+          source: #{$b.Source}
+          compiler_url: #{$b.CompilerURL}
           additional_tags: #{join $b.AdditionalTags " "}#{end}
