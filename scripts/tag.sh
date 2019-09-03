@@ -1,3 +1,6 @@
 #!/bin/sh
 
-echo $ADDITIONAL_TAGS
+for tag in $ADDITIONAL_TAGS; do
+  echo Tagging with $tag
+  docker image tag $TAG $tag
+done
