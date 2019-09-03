@@ -23,21 +23,27 @@ jobs:
   
   build:
     parameters:
-      version:
+      tag:
         type: string
       build_context:
         type: string
+      additional_tags:
+        type: string
     executor: docker_builder
     environment:
-      VERSION: << parameters.version >>
+      TAG: << parameters.tag >>
       BUILD_CONTEXT: << parameters.build_context >>
+      ADDITIONAL_TAGS: << parameters.additional_tags >>
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          name: Build image zenika/kotlin:<< parameters.version >>
+          name: Build image << parameters.tag >>
           command: ./scripts/build.sh
+      - run:
+          name: Tag image << parameters.tag >>
+          command: ./scripts/tag.sh
 
 workflows:
   version: 2
@@ -54,12 +60,9 @@ workflows:
                 - master
 
   build:
-    jobs:#{range $_, $version := .Versions}#{range $_, $jdkVersion := $version.JDKVersions}
+    jobs:#{range $_, $b := .builds}
       - build:
-          name: build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}
-          version: #{$version.Version}-jdk#{$jdkVersion.JDKVersion}
-          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}#{range $_, $variant := $jdkVersion.Variants}
-      - build:
-          name: build_#{$version.VersionSnakeCased}_jdk#{$jdkVersion.JDKVersion}_#{$variant.Base}
-          version: #{$version.Version}-jdk#{$jdkVersion.JDKVersion}-#{$variant.Base}
-          build_context: #{$version.Version}/jdk#{$jdkVersion.JDKVersion}/#{$variant.Base}#{end}#{end}#{end}
+          name: #{$b.Name}
+          tag: #{$b.Tag}
+          build_context: #{$b.BuildContext}
+          additional_tags: #{join $b.AdditionalTags ","}#{end}

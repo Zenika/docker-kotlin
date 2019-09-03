@@ -1,5 +1,4 @@
 Bases:
-  - common
   - debian
   - slim
   - alpine

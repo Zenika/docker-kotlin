@@ -3,6 +3,7 @@ package main
 import (
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -47,6 +48,53 @@ type Base struct {
 type AdditionalRepository struct {
 	Repository string
 	Tags       []string
+}
+
+// Build is a specific build of the image
+type Build struct {
+	Version
+	JDKVersion
+	Base
+}
+
+// Name is build's name in CI
+func (b Build) Name() (n string) {
+	n = "build_" + b.Version.VersionSnakeCased() + "_jdk" + b.JDKVersion.JDKVersion
+	if b.JDKVersion.Base.Base != b.Base.Base {
+		n += "_" + b.Base.Base
+	}
+	return
+}
+
+// Tag is build's main tag
+func (b Build) Tag() (t string) {
+	t = "zenika/kotlin:" + b.Version.Version + "-jdk" + b.JDKVersion.JDKVersion
+	if b.JDKVersion.Base.Base != b.Base.Base {
+		t += "-" + b.Base.Base
+	}
+	return
+}
+
+// BuildContext is build's build context
+func (b Build) BuildContext() (bc string) {
+	bc = path.Join(b.Version.Version, "jdk"+b.JDKVersion.JDKVersion)
+	if b.JDKVersion.Base.Base != b.Base.Base {
+		bc = path.Join(bc, b.Base.Base)
+	}
+	return
+}
+
+// AdditionalTags is build's additional tags
+func (b Build) AdditionalTags() (tags []string) {
+	for _, t := range b.Base.AdditionalTags {
+		tags = append(tags, "zenika/kotlin:"+t)
+	}
+	for _, r := range b.Base.AdditionalRepositories {
+		for _, t := range r.Tags {
+			tags = append(tags, r.Repository+":"+t)
+		}
+	}
+	return
 }
 
 // Context contains information for the templates
@@ -122,16 +170,29 @@ func loadConfig() error {
 	return viper.Unmarshal(&config)
 }
 
+func listBuilds() (builds []Build) {
+	for _, version := range config.Versions {
+		for _, jdkVersion := range version.JDKVersions {
+			builds = append(builds, Build{version, jdkVersion, jdkVersion.Base})
+			for _, variant := range jdkVersion.Variants {
+				builds = append(builds, Build{version, jdkVersion, variant})
+			}
+		}
+	}
+	return
+}
+
 func generateAll() error {
+	var builds = listBuilds()
 	for _, version := range config.Versions {
 		if err := generateVersion(version); err != nil {
 			return err
 		}
 	}
-	if err := generateReadme(); err != nil {
+	if err := generateReadme(builds); err != nil {
 		return err
 	}
-	if err := generateCircleci(); err != nil {
+	if err := generateCircleci(builds); err != nil {
 		return err
 	}
 	return nil
@@ -180,9 +241,6 @@ func generateBase(ctxt Context, base Base, isDefault bool) error {
 		return err
 	}
 
-	if err := generateTemplates("common", ctxt); err != nil {
-		return err
-	}
 	if err := generateTemplates(base.Base, ctxt); err != nil {
 		return err
 	}
@@ -200,12 +258,12 @@ func generateTemplates(name string, ctxt Context) error {
 	return nil
 }
 
-func generateReadme() error {
-	return generateTemplate(readmeTemplate, config, wd)
+func generateReadme(builds []Build) error {
+	return generateTemplate(readmeTemplate, map[string]interface{}{"builds": builds}, wd)
 }
 
-func generateCircleci() error {
-	return generateTemplate(circleciTemplate, config, wd)
+func generateCircleci(builds []Build) error {
+	return generateTemplate(circleciTemplate, map[string]interface{}{"builds": builds}, wd)
 }
 
 func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
@@ -229,7 +287,7 @@ func generateTemplate(t *template.Template, ctxt interface{}, outDir string) err
 }
 
 func loadAllTemplates() error {
-	if err := loadVersionsTemplates(); err != nil {
+	if err := loadBasesTemplates(); err != nil {
 		return err
 	}
 	if err := loadReadmeTemplate(); err != nil {
@@ -241,9 +299,9 @@ func loadAllTemplates() error {
 	return nil
 }
 
-func loadVersionsTemplates() error {
+func loadBasesTemplates() error {
 	for _, base := range config.Bases {
-		if err := loadVersionTemplate(base); err != nil {
+		if err := loadBaseTemplate(base); err != nil {
 			return err
 		}
 	}
@@ -251,7 +309,7 @@ func loadVersionsTemplates() error {
 	return nil
 }
 
-func loadVersionTemplate(base string) error {
+func loadBaseTemplate(base string) error {
 	baseDir := filepath.Join(templatesDir, base)
 
 	return filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
