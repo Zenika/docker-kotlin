@@ -1,4 +1,4 @@
-FROM openjdk:#{.JDKVersion}-jdk-alpine
+FROM openjdk:#{.JDKVersion.JDKVersion}-jdk-alpine
 
 ARG CIRCLE_BUILD_DATE
 ARG CIRCLE_SHA1
@@ -11,7 +11,7 @@ LABEL org.label-schema.build-date=$CIRCLE_BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/Zenika/docker-kotlin" \
       org.label-schema.vcs-ref=$CIRCLE_SHA1 \
       org.label-schema.vendor="Zenika" \
-      org.label-schema.version="#{.Version}-jdk#{.JDKVersion}-alpine"
+      org.label-schema.version="#{.Tag}"
 
 RUN apk add --no-cache bash && \
     apk add --no-cache -t build-dependencies wget && \

@@ -1,4 +1,4 @@
-FROM openjdk:#{.JDKVersion}-jdk
+FROM openjdk:#{.JDKVersion.JDKVersion}-jdk
 
 ARG CIRCLE_BUILD_DATE
 ARG CIRCLE_SHA1
@@ -11,7 +11,7 @@ LABEL org.label-schema.build-date=$CIRCLE_BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/Zenika/docker-kotlin" \
       org.label-schema.vcs-ref=$CIRCLE_SHA1 \
       org.label-schema.vendor="Zenika" \
-      org.label-schema.version="#{.Version}-jdk#{.JDKVersion}"
+      org.label-schema.version="#{.Tag}"
 
 RUN cd /usr/lib && \
     wget -q #{.CompilerURL} && \

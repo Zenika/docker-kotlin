@@ -3,7 +3,6 @@ package main
 import (
 	"io/ioutil"
 	"os"
-	"path"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -99,11 +98,15 @@ func (b Build) FullTag() string {
 
 // BuildContext is build's build context
 func (b Build) BuildContext() (bc string) {
-	bc = path.Join(b.Version.Version, "jdk"+b.JDKVersion.JDKVersion)
+	bc = filepath.Join(b.Version.Version, "jdk"+b.JDKVersion.JDKVersion)
 	if b.JDKVersion.Base.Base != b.Base.Base {
-		bc = path.Join(bc, b.Base.Base)
+		bc = filepath.Join(bc, b.Base.Base)
 	}
 	return
+}
+
+func (b Build) Wd() string {
+	return filepath.Join(wd, b.BuildContext())
 }
 
 // AdditionalTags is build's additional tags
@@ -117,16 +120,6 @@ func (b Build) AdditionalTags() (tags []string) {
 		}
 	}
 	return
-}
-
-// Context contains information for the templates
-type Context struct {
-	Wd                     string
-	Version                string
-	CompilerURL            string
-	JDKVersion             string
-	AdditionalTags         []string
-	AdditionalRepositories []AdditionalRepository
 }
 
 var (
@@ -153,25 +146,6 @@ func main() {
 	}
 }
 
-func contextWithVersion(version Version) Context {
-	return Context{Wd: filepath.Join(wd, version.Version), Version: version.Version, CompilerURL: version.CompilerURL}
-}
-
-func (ctxt Context) withJDKVersion(jdkVersion JDKVersion) Context {
-	ctxt.Wd = filepath.Join(ctxt.Wd, "jdk"+jdkVersion.JDKVersion)
-	ctxt.JDKVersion = jdkVersion.JDKVersion
-	return ctxt
-}
-
-func (ctxt Context) withBase(base Base, isDefault bool) Context {
-	if !isDefault {
-		ctxt.Wd = filepath.Join(ctxt.Wd, base.Base)
-	}
-	ctxt.AdditionalTags = base.AdditionalTags
-	ctxt.AdditionalRepositories = base.AdditionalRepositories
-	return ctxt
-}
-
 func initTemplatesDir() error {
 	var err error
 	if wd, err = os.Getwd(); err != nil {
@@ -193,8 +167,8 @@ func loadConfig() error {
 }
 
 func generateAll() error {
-	for _, version := range config.Versions {
-		if err := generateVersion(version); err != nil {
+	for _, b := range config.Builds() {
+		if err := generateBuild(b); err != nil {
 			return err
 		}
 	}
@@ -207,59 +181,13 @@ func generateAll() error {
 	return nil
 }
 
-func generateVersion(version Version) error {
-	ctxt := contextWithVersion(version)
-
-	if err := ensureDir(ctxt.Wd); err != nil {
+func generateBuild(b Build) error {
+	if err := ensureDir(b.Wd()); err != nil {
 		return err
 	}
 
-	for _, jdkVersion := range version.JDKVersions {
-		if err := generateJDKVersion(ctxt, jdkVersion); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func generateJDKVersion(ctxt Context, jdkVersion JDKVersion) error {
-	ctxt = ctxt.withJDKVersion(jdkVersion)
-
-	if err := ensureDir(ctxt.Wd); err != nil {
-		return err
-	}
-
-	if err := generateBase(ctxt, jdkVersion.Base, true); err != nil {
-		return err
-	}
-
-	for _, variant := range jdkVersion.Variants {
-		if err := generateBase(ctxt, variant, false); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func generateBase(ctxt Context, base Base, isDefault bool) error {
-	ctxt = ctxt.withBase(base, isDefault)
-
-	if err := ensureDir(ctxt.Wd); err != nil {
-		return err
-	}
-
-	if err := generateTemplates(base.Base, ctxt); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func generateTemplates(name string, ctxt Context) error {
-	for _, t := range templates[name] {
-		if err := generateTemplate(t, ctxt, ctxt.Wd); err != nil {
+	for _, t := range templates[b.Base.Base] {
+		if err := generateTemplate(t, b, b.Wd()); err != nil {
 			return err
 		}
 	}
