@@ -60,9 +60,9 @@ workflows:
                 - master
 
   build:
-    jobs:#{range $_, $b := .builds}
+    jobs:#{range $_, $b := .Builds}
       - build:
           name: #{$b.Name}
-          tag: #{$b.Tag}
+          tag: #{$b.FullTag}
           build_context: #{$b.BuildContext}
           additional_tags: #{join $b.AdditionalTags " "}#{end}

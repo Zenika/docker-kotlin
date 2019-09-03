@@ -18,6 +18,13 @@ type Config struct {
 	Versions []Version
 }
 
+func (c Config) Builds() (builds []Build) {
+	for _, v := range c.Versions {
+		builds = append(builds, v.Builds()...)
+	}
+	return
+}
+
 // Version contains information about a version
 type Version struct {
 	Version     string
@@ -28,6 +35,16 @@ type Version struct {
 // VersionSnakeCased returns v.Version snake-cased
 func (v Version) VersionSnakeCased() string {
 	return string(regexp.MustCompile("\\W").ReplaceAll(([]byte)(v.Version), ([]byte)("_")))
+}
+
+func (v Version) Builds() (builds []Build) {
+	for _, jdkVersion := range v.JDKVersions {
+		builds = append(builds, Build{v, jdkVersion, jdkVersion.Base})
+		for _, variant := range jdkVersion.Variants {
+			builds = append(builds, Build{v, jdkVersion, variant})
+		}
+	}
+	return
 }
 
 // JDKVersion contains information about a JDK version
@@ -68,11 +85,16 @@ func (b Build) Name() (n string) {
 
 // Tag is build's main tag
 func (b Build) Tag() (t string) {
-	t = "zenika/kotlin:" + b.Version.Version + "-jdk" + b.JDKVersion.JDKVersion
+	t = b.Version.Version + "-jdk" + b.JDKVersion.JDKVersion
 	if b.JDKVersion.Base.Base != b.Base.Base {
 		t += "-" + b.Base.Base
 	}
 	return
+}
+
+// FullTag is build's main tag with image name
+func (b Build) FullTag() string {
+	return "zenika/kotlin:" + b.Tag()
 }
 
 // BuildContext is build's build context
@@ -170,29 +192,16 @@ func loadConfig() error {
 	return viper.Unmarshal(&config)
 }
 
-func listBuilds() (builds []Build) {
-	for _, version := range config.Versions {
-		for _, jdkVersion := range version.JDKVersions {
-			builds = append(builds, Build{version, jdkVersion, jdkVersion.Base})
-			for _, variant := range jdkVersion.Variants {
-				builds = append(builds, Build{version, jdkVersion, variant})
-			}
-		}
-	}
-	return
-}
-
 func generateAll() error {
-	var builds = listBuilds()
 	for _, version := range config.Versions {
 		if err := generateVersion(version); err != nil {
 			return err
 		}
 	}
-	if err := generateReadme(builds); err != nil {
+	if err := generateReadme(); err != nil {
 		return err
 	}
-	if err := generateCircleci(builds); err != nil {
+	if err := generateCircleci(); err != nil {
 		return err
 	}
 	return nil
@@ -258,12 +267,12 @@ func generateTemplates(name string, ctxt Context) error {
 	return nil
 }
 
-func generateReadme(builds []Build) error {
-	return generateTemplate(readmeTemplate, map[string]interface{}{"builds": builds}, wd)
+func generateReadme() error {
+	return generateTemplate(readmeTemplate, config, wd)
 }
 
-func generateCircleci(builds []Build) error {
-	return generateTemplate(circleciTemplate, map[string]interface{}{"builds": builds}, wd)
+func generateCircleci() error {
+	return generateTemplate(circleciTemplate, config, wd)
 }
 
 func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
