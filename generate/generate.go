@@ -120,21 +120,20 @@ func (b Build) AdditionalTags() (tags []string) {
 }
 
 var (
-	config           Config
-	readmeTemplate   *template.Template
-	circleciTemplate *template.Template
-	templatesDir     string
-	wd               string
+	wd           string
+	templatesDir string
+	config       Config
+	templates    []*template.Template
 )
 
 func main() {
-	if err := initTemplatesDir(); err != nil {
+	if err := initDirs(); err != nil {
 		panic(err)
 	}
-	if err := loadAllTemplates(); err != nil {
+	if err := loadTemplates(); err != nil {
 		panic(err)
 	}
-	if err := loadVersions(); err != nil {
+	if err := loadConfig(); err != nil {
 		panic(err)
 	}
 	if err := generateAll(); err != nil {
@@ -142,7 +141,7 @@ func main() {
 	}
 }
 
-func initTemplatesDir() error {
+func initDirs() error {
 	var err error
 	if wd, err = os.Getwd(); err != nil {
 		return err
@@ -151,71 +150,30 @@ func initTemplatesDir() error {
 	return nil
 }
 
-func loadVersions() error {
-	viper.AddConfigPath(filepath.Join(wd))
-	viper.SetConfigName("versions")
+func loadTemplates() error {
+	return filepath.Walk(templatesDir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
 
-	if err := viper.ReadInConfig(); err != nil {
-		return err
-	}
+		if info.IsDir() {
+			return nil
+		}
 
-	return viper.Unmarshal(&config)
-}
+		relPath, err := filepath.Rel(templatesDir, path)
+		if err != nil {
+			return err
+		}
 
-func generateAll() error {
-	if err := generateReadme(); err != nil {
-		return err
-	}
-	if err := generateCircleci(); err != nil {
-		return err
-	}
-	return nil
-}
+		template, err := readTemplateFile(relPath, path)
+		if err != nil {
+			return err
+		}
 
-func generateReadme() error {
-	return generateTemplate(readmeTemplate, config, wd)
-}
+		templates = append(templates, template)
 
-func generateCircleci() error {
-	return generateTemplate(circleciTemplate, config, wd)
-}
-
-func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
-	fName := filepath.Join(outDir, t.Name())
-
-	f, err := os.Create(fName)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	if err := t.Execute(f, ctxt); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func loadAllTemplates() error {
-	if err := loadReadmeTemplate(); err != nil {
-		return err
-	}
-	if err := loadCircleciTemplate(); err != nil {
-		return err
-	}
-	return nil
-}
-
-func loadReadmeTemplate() error {
-	var err error
-	readmeTemplate, err = readTemplateFile("README.md", filepath.Join(templatesDir, "README.md"))
-	return err
-}
-
-func loadCircleciTemplate() error {
-	var err error
-	circleciTemplate, err = readTemplateFile(".circleci/config.yml", filepath.Join(templatesDir, ".circleci/config.yml"))
-	return err
+		return nil
+	})
 }
 
 func readTemplateFile(name, path string) (*template.Template, error) {
@@ -232,4 +190,40 @@ func readTemplateFile(name, path string) (*template.Template, error) {
 	t = template.Must(t.Parse(string(s)))
 
 	return t, nil
+}
+
+func loadConfig() error {
+	viper.AddConfigPath(filepath.Join(wd))
+	viper.SetConfigName("versions")
+
+	if err := viper.ReadInConfig(); err != nil {
+		return err
+	}
+
+	return viper.Unmarshal(&config)
+}
+
+func generateAll() error {
+	for _, t := range templates {
+		if err := generateTemplate(t, config, wd); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
+	fName := filepath.Join(outDir, t.Name())
+
+	f, err := os.Create(fName)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	if err := t.Execute(f, ctxt); err != nil {
+		return err
+	}
+
+	return nil
 }
