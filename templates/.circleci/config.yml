@@ -76,8 +76,8 @@ workflows:
           build_context: #{$b.Base.Base}
           source: #{$b.Source}
           compiler_url: #{$b.CompilerURL}
-          additional_tags: #{join $b.AdditionalTags " "}#{end}
-    filters:
-      branches:
-        only:
-          - deploy
+          additional_tags: #{join $b.AdditionalTags " "}
+          filters:
+            branches:
+              only:
+                - deploy#{end}
