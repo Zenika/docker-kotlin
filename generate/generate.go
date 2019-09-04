@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"text/template"
 
@@ -12,8 +13,15 @@ import (
 
 // Config contains information about the different versions
 type Config struct {
-	Bases    []string
 	Versions []Version
+}
+
+// Builds lists all builds
+func (c Config) Builds() (builds []Build) {
+	for _, v := range c.Versions {
+		builds = append(builds, v.Builds()...)
+	}
+	return
 }
 
 // Version contains information about a version
@@ -21,6 +29,22 @@ type Version struct {
 	Version     string
 	CompilerURL string
 	JDKVersions []JDKVersion
+}
+
+// VersionSnakeCased returns v.Version snake-cased
+func (v Version) VersionSnakeCased() string {
+	return string(regexp.MustCompile("\\W").ReplaceAll(([]byte)(v.Version), ([]byte)("_")))
+}
+
+// Builds lists builds for this Version
+func (v Version) Builds() (builds []Build) {
+	for _, jdkVersion := range v.JDKVersions {
+		builds = append(builds, Build{v, jdkVersion, jdkVersion.Base})
+		for _, variant := range jdkVersion.Variants {
+			builds = append(builds, Build{v, jdkVersion, variant})
+		}
+	}
+	return
 }
 
 // JDKVersion contains information about a JDK version
@@ -43,186 +67,91 @@ type AdditionalRepository struct {
 	Tags       []string
 }
 
-// Context contains information for the templates
-type Context struct {
-	Wd                     string
-	Version                string
-	CompilerURL            string
-	JDKVersion             string
-	AdditionalTags         []string
-	AdditionalRepositories []AdditionalRepository
+// Build is a specific build of the image
+type Build struct {
+	Version
+	JDKVersion
+	Base
+}
+
+// Name is build's name in CI
+func (b Build) Name() (n string) {
+	n = "build_" + b.Version.VersionSnakeCased() + "_jdk" + b.JDKVersion.JDKVersion
+	if b.JDKVersion.Base.Base != b.Base.Base {
+		n += "_" + b.Base.Base
+	}
+	return
+}
+
+// Tag is build's main tag
+func (b Build) Tag() (t string) {
+	t = b.Version.Version + "-jdk" + b.JDKVersion.JDKVersion
+	if b.JDKVersion.Base.Base != b.Base.Base {
+		t += "-" + b.Base.Base
+	}
+	return
+}
+
+// Source is build's source image
+func (b Build) Source() (s string) {
+	s = "openjdk:" + b.JDKVersion.JDKVersion + "-jdk"
+	if b.JDKVersion.Base.Base != b.Base.Base {
+		s += "-" + b.Base.Base
+	}
+	return
+}
+
+// FullTag is build's main tag with image name
+func (b Build) FullTag() string {
+	return "zenika/kotlin:" + b.Tag()
+}
+
+// AdditionalTags is build's additional tags
+func (b Build) AdditionalTags() (tags []string) {
+	for _, t := range b.Base.AdditionalTags {
+		tags = append(tags, "zenika/kotlin:"+t)
+	}
+	for _, r := range b.Base.AdditionalRepositories {
+		for _, t := range r.Tags {
+			tags = append(tags, r.Repository+":"+t)
+		}
+	}
+	return
 }
 
 var (
-	config         Config
-	readmeTemplate *template.Template
-	templates      = make(map[string][]*template.Template)
-	templatesDir   string
-	wd             string
+	wd           string
+	templatesDir string
+	config       Config
+	templates    []*template.Template
 )
 
-func contextWithVersion(version Version) Context {
-	return Context{Wd: filepath.Join(wd, version.Version), Version: version.Version, CompilerURL: version.CompilerURL}
-}
-
-func (ctxt Context) withJDKVersion(jdkVersion JDKVersion) Context {
-	ctxt.Wd = filepath.Join(ctxt.Wd, "jdk"+jdkVersion.JDKVersion)
-	ctxt.JDKVersion = jdkVersion.JDKVersion
-	return ctxt
-}
-
-func (ctxt Context) withBase(base Base, isDefault bool) Context {
-	if !isDefault {
-		ctxt.Wd = filepath.Join(ctxt.Wd, base.Base)
-	}
-	ctxt.AdditionalTags = base.AdditionalTags
-	ctxt.AdditionalRepositories = base.AdditionalRepositories
-	return ctxt
-}
-
-func init() {
-	var err error
-	if wd, err = os.Getwd(); err != nil {
+func main() {
+	if err := initDirs(); err != nil {
 		panic(err)
 	}
-	templatesDir = filepath.Join(wd, "templates")
-}
-
-func init() {
-	viper.AddConfigPath(filepath.Join(wd))
-	viper.SetConfigName("versions")
-
-	if err := viper.ReadInConfig(); err != nil {
-		panic(err)
-	}
-
-	viper.Unmarshal(&config)
-}
-
-func init() {
 	if err := loadTemplates(); err != nil {
 		panic(err)
 	}
-}
-
-func init() {
-	if err := loadReadmeTemplate(); err != nil {
+	if err := loadConfig(); err != nil {
+		panic(err)
+	}
+	if err := generateAll(); err != nil {
 		panic(err)
 	}
 }
 
-func main() {
-	for _, version := range config.Versions {
-		if err := generateVersion(version); err != nil {
-			panic(err)
-		}
-	}
-	if err := generateReadme(); err != nil {
-		panic(err)
-	}
-}
-
-func generateVersion(version Version) error {
-	ctxt := contextWithVersion(version)
-
-	if err := ensureDir(ctxt.Wd); err != nil {
+func initDirs() error {
+	var err error
+	if wd, err = os.Getwd(); err != nil {
 		return err
 	}
-
-	for _, jdkVersion := range version.JDKVersions {
-		if err := generateJDKVersion(ctxt, jdkVersion); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func generateJDKVersion(ctxt Context, jdkVersion JDKVersion) error {
-	ctxt = ctxt.withJDKVersion(jdkVersion)
-
-	if err := ensureDir(ctxt.Wd); err != nil {
-		return err
-	}
-
-	if err := generateBase(ctxt, jdkVersion.Base, true); err != nil {
-		return err
-	}
-
-	for _, variant := range jdkVersion.Variants {
-		if err := generateBase(ctxt, variant, false); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func generateBase(ctxt Context, base Base, isDefault bool) error {
-	ctxt = ctxt.withBase(base, isDefault)
-
-	if err := ensureDir(ctxt.Wd); err != nil {
-		return err
-	}
-
-	if err := generateTemplates("common", ctxt); err != nil {
-		return err
-	}
-	if err := generateTemplates(base.Base, ctxt); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func generateTemplates(name string, ctxt Context) error {
-	for _, t := range templates[name] {
-		if err := generateTemplate(t, ctxt, ctxt.Wd); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func generateReadme() error {
-	return generateTemplate(readmeTemplate, config, wd)
-}
-
-func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
-	fName := filepath.Join(outDir, t.Name())
-
-	if err := ensureDir(filepath.Dir(fName)); err != nil {
-		return err
-	}
-
-	f, err := os.Create(fName)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	if err := t.Execute(f, ctxt); err != nil {
-		return err
-	}
-
+	templatesDir = filepath.Join(wd, "templates")
 	return nil
 }
 
 func loadTemplates() error {
-	for _, base := range config.Bases {
-		if err := loadTemplate(base); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func loadTemplate(base string) error {
-	baseDir := filepath.Join(templatesDir, base)
-
-	return filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
+	return filepath.Walk(templatesDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
@@ -231,26 +160,20 @@ func loadTemplate(base string) error {
 			return nil
 		}
 
-		relPath, err := filepath.Rel(baseDir, path)
+		relPath, err := filepath.Rel(templatesDir, path)
 		if err != nil {
 			return err
 		}
 
-		t, err := readTemplateFile(relPath, path)
+		template, err := readTemplateFile(relPath, path)
 		if err != nil {
 			return err
 		}
 
-		templates[base] = append(templates[base], t)
+		templates = append(templates, template)
 
 		return nil
 	})
-}
-
-func loadReadmeTemplate() error {
-	var err error
-	readmeTemplate, err = readTemplateFile("README.md", filepath.Join(templatesDir, "README.md"))
-	return err
 }
 
 func readTemplateFile(name, path string) (*template.Template, error) {
@@ -269,6 +192,38 @@ func readTemplateFile(name, path string) (*template.Template, error) {
 	return t, nil
 }
 
-func ensureDir(dir string) error {
-	return os.MkdirAll(dir, 0755)
+func loadConfig() error {
+	viper.AddConfigPath(filepath.Join(wd))
+	viper.SetConfigName("versions")
+
+	if err := viper.ReadInConfig(); err != nil {
+		return err
+	}
+
+	return viper.Unmarshal(&config)
+}
+
+func generateAll() error {
+	for _, t := range templates {
+		if err := generateTemplate(t, config, wd); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func generateTemplate(t *template.Template, ctxt interface{}, outDir string) error {
+	fName := filepath.Join(outDir, t.Name())
+
+	f, err := os.Create(fName)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	if err := t.Execute(f, ctxt); err != nil {
+		return err
+	}
+
+	return nil
 }
