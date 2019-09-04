@@ -51,7 +51,7 @@ jobs:
           name: Tag image << parameters.tag >>
           command: ./scripts/tag.sh
       - run:
-          name: push image << parameters.tag >>
+          name: Push image << parameters.tag >>
           command: ./scripts/push.sh
 
 workflows:
@@ -77,3 +77,7 @@ workflows:
           source: #{$b.Source}
           compiler_url: #{$b.CompilerURL}
           additional_tags: #{join $b.AdditionalTags " "}#{end}
+    filters:
+      branches:
+        only:
+          - deploy

@@ -51,7 +51,7 @@ jobs:
           name: Tag image << parameters.tag >>
           command: ./scripts/tag.sh
       - run:
-          name: push image << parameters.tag >>
+          name: Push image << parameters.tag >>
           command: ./scripts/push.sh
 
 workflows:
@@ -259,3 +259,7 @@ workflows:
           source: openjdk:8-jdk-slim
           compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.1.61/kotlin-compiler-1.1.61.zip
           additional_tags: zenika/kotlin:1.1.61-jdk8-slim
+    filters:
+      branches:
+        only:
+          - deploy
