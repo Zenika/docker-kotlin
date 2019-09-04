@@ -50,6 +50,9 @@ jobs:
       - run:
           name: Tag image << parameters.tag >>
           command: ./scripts/tag.sh
+      - run:
+          name: push image << parameters.tag >>
+          command: ./scripts/push.sh
 
 workflows:
   version: 2
