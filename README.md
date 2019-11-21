@@ -72,16 +72,22 @@ See https://en.wikipedia.org/wiki/Kotlin_%28programming_language%29 for more inf
 
 ### Usage
 
-Start using the Kotlin REPL : `docker container run -it --rm zenika/kotlin`
+Start using the Kotlin REPL: `docker container run -it --rm zenika/kotlin`
 
-See Kotlin compiler version : `docker container run -it --rm zenika/kotlin kotlinc -version`
+Compile an app into a JAR file: `docker container run -v /path/to/app:/app --rm zenika/kotlin kotlinc /app -include-runtime -d /app/app.jar`
 
-See Kotlin compiler help : `docker container run -it --rm zenika/kotlin kotlinc -help`
+See Kotlin compiler version: `docker container run -it --rm zenika/kotlin kotlinc -version`
+
+See Kotlin compiler help: `docker container run -it --rm zenika/kotlin kotlinc -help`
+
+### Examples
+
+Some examples are available here: https://github.com/Zenika/docker-kotlin/blob/master/examples
 
 ### Reference
 
- * Kotlin website : https://kotlinlang.org
+ * Kotlin website: https://kotlinlang.org
 
- * Where to file issues : https://github.com/Zenika/docker-kotlin/issues
+ * Where to file issues: https://github.com/Zenika/docker-kotlin/issues
 
- * Maintained by : https://www.zenika.com
+ * Maintained by: https://www.zenika.com
