@@ -2,6 +2,26 @@
 
 ### Supported tags and respective `Dockerfile` links
 
+#### 1.3-eap
+
+ * `1.3-eap-jdk12`, `1.3.70-eap-jdk12`, `1.3.70-eap-42-jdk12` [(oracle/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/oracle/Dockerfile)
+
+ * `1.3-eap-jdk12-alpine`, `1.3.70-eap-jdk12-alpine`, `1.3.70-eap-42-jdk12-alpine` [(alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/alpine/Dockerfile)
+
+ * `1.3-eap-jdk11`, `1.3.70-eap`, `1.3.70-eap-42`, `1.3.70-eap-jdk11`, `1.3.70-eap-42-jdk11` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
+
+ * `1.3-eap-jdk11-slim`, `1.3.70-eap-slim`, `1.3.70-eap-42-slim`, `1.3.70-eap-jdk11-slim`, `1.3.70-eap-42-jdk11-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
+
+ * `1.3-eap-jdk10`, `1.3.70-eap-jdk10`, `1.3.70-eap-42-jdk10` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
+
+ * `1.3-eap-jdk10-slim`, `1.3.70-eap-jdk10-slim`, `1.3.70-eap-42-jdk10-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
+
+ * `1.3-eap-jdk8`, `1.3.70-eap-jdk8`, `1.3.70-eap-42-jdk8` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
+
+ * `1.3-eap-jdk8-alpine`, `1.3.70-eap-alpine`, `1.3.70-eap-42-alpine`, `1.3.70-eap-jdk8-alpine`, `1.3.70-eap-42-jdk8-alpine` [(alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/alpine/Dockerfile)
+
+ * `1.3-eap-jdk8-slim`, `1.3.70-eap-jdk8-slim`, `1.3.70-eap-42-jdk8-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
+
 #### 1.3
 
  * `1.3-jdk12`, `jdk12`, `1-jdk12`, `1.3.61-jdk12` [(oracle/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/oracle/Dockerfile)
