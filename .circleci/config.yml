@@ -67,7 +67,7 @@ workflows:
       - notify_kotlin_releases
     triggers:
       - schedule:
-          cron: "* * * * *"
+          cron: "0 * * * *"
           filters:
             branches:
               only:
