@@ -80,72 +80,72 @@ workflows:
           tag: zenika/kotlin:1.4-jdk12
           build_context: oracle
           source: openjdk:12-jdk
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4-jdk12 zenika/kotlin:1.4-M2-jdk12
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4-jdk12 zenika/kotlin:1.4-M3-jdk12
           filters: *only-deploy
       - build:
           name: build_1_4_jdk12_alpine
           tag: zenika/kotlin:1.4-jdk12-alpine
           build_context: alpine
           source: openjdk:12-jdk-alpine
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4-jdk12-alpine zenika/kotlin:1.4-M2-jdk12-alpine zenika/alpine-kotlin:1.4-jdk12 zenika/alpine-kotlin:1.4-M2-jdk12
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4-jdk12-alpine zenika/kotlin:1.4-M3-jdk12-alpine zenika/alpine-kotlin:1.4-jdk12 zenika/alpine-kotlin:1.4-M3-jdk12
           filters: *only-deploy
       - build:
           name: build_1_4_jdk11
           tag: zenika/kotlin:1.4-jdk11
           build_context: debian
           source: openjdk:11-jdk
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4 zenika/kotlin:1.4-M2 zenika/kotlin:1.4-jdk11 zenika/kotlin:1.4-M2-jdk11
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4 zenika/kotlin:1.4-M3 zenika/kotlin:1.4-jdk11 zenika/kotlin:1.4-M3-jdk11
           filters: *only-deploy
       - build:
           name: build_1_4_jdk11_slim
           tag: zenika/kotlin:1.4-jdk11-slim
           build_context: slim
           source: openjdk:11-jdk-slim
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4-slim zenika/kotlin:1.4-M2-slim zenika/kotlin:1.4-jdk11-slim zenika/kotlin:1.4-M2-jdk11-slim
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4-slim zenika/kotlin:1.4-M3-slim zenika/kotlin:1.4-jdk11-slim zenika/kotlin:1.4-M3-jdk11-slim
           filters: *only-deploy
       - build:
           name: build_1_4_jdk10
           tag: zenika/kotlin:1.4-jdk10
           build_context: debian
           source: openjdk:10-jdk
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4-jdk10 zenika/kotlin:1.4-M2-jdk10
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4-jdk10 zenika/kotlin:1.4-M3-jdk10
           filters: *only-deploy
       - build:
           name: build_1_4_jdk10_slim
           tag: zenika/kotlin:1.4-jdk10-slim
           build_context: slim
           source: openjdk:10-jdk-slim
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4-jdk10-slim zenika/kotlin:1.4-M2-jdk10-slim
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4-jdk10-slim zenika/kotlin:1.4-M3-jdk10-slim
           filters: *only-deploy
       - build:
           name: build_1_4_jdk8
           tag: zenika/kotlin:1.4-jdk8
           build_context: debian
           source: openjdk:8-jdk
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4-jdk8 zenika/kotlin:1.4-M2-jdk8
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4-jdk8 zenika/kotlin:1.4-M3-jdk8
           filters: *only-deploy
       - build:
           name: build_1_4_jdk8_alpine
           tag: zenika/kotlin:1.4-jdk8-alpine
           build_context: alpine
           source: openjdk:8-jdk-alpine
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4-alpine zenika/kotlin:1.4-M2-alpine zenika/kotlin:1.4-jdk8-alpine zenika/kotlin:1.4-M2-jdk8-alpine zenika/alpine-kotlin:1.4 zenika/alpine-kotlin:1.4-M2 zenika/alpine-kotlin:1.4-jdk8 zenika/alpine-kotlin:1.4-M2-jdk8
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4-alpine zenika/kotlin:1.4-M3-alpine zenika/kotlin:1.4-jdk8-alpine zenika/kotlin:1.4-M3-jdk8-alpine zenika/alpine-kotlin:1.4 zenika/alpine-kotlin:1.4-M3 zenika/alpine-kotlin:1.4-jdk8 zenika/alpine-kotlin:1.4-M3-jdk8
           filters: *only-deploy
       - build:
           name: build_1_4_jdk8_slim
           tag: zenika/kotlin:1.4-jdk8-slim
           build_context: slim
           source: openjdk:8-jdk-slim
-          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M2/kotlin-compiler-1.4-M2.zip
-          additional_tags: zenika/kotlin:1.4-jdk8-slim zenika/kotlin:1.4-M2-jdk8-slim
+          compiler_url: https://github.com/JetBrains/kotlin/releases/download/v1.4-M3/kotlin-compiler-1.4-M3.zip
+          additional_tags: zenika/kotlin:1.4-jdk8-slim zenika/kotlin:1.4-M3-jdk8-slim
           filters: *only-deploy
       - build:
           name: build_1_3_jdk12
