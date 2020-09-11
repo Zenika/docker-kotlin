@@ -4,23 +4,23 @@
 
 #### 1.4
 
- * `1.4-jdk12`, `1.4-jdk12`, `1.4.0-jdk12` [(oracle/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/oracle/Dockerfile)
+ * `1.4-jdk12`, `1.4-jdk12`, `1.4.10-jdk12` [(oracle/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/oracle/Dockerfile)
 
- * `1.4-jdk12-alpine`, `1.4-jdk12-alpine`, `1.4.0-jdk12-alpine` [(alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/alpine/Dockerfile)
+ * `1.4-jdk12-alpine`, `1.4-jdk12-alpine`, `1.4.10-jdk12-alpine` [(alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/alpine/Dockerfile)
 
- * `1.4-jdk11`, `1.4`, `1.4.0`, `1.4-jdk11`, `1.4.0-jdk11` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
+ * `1.4-jdk11`, `1.4`, `1.4.10`, `1.4-jdk11`, `1.4.10-jdk11` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
 
- * `1.4-jdk11-slim`, `1.4-slim`, `1.4.0-slim`, `1.4-jdk11-slim`, `1.4.0-jdk11-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
+ * `1.4-jdk11-slim`, `1.4-slim`, `1.4.10-slim`, `1.4-jdk11-slim`, `1.4.10-jdk11-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
 
- * `1.4-jdk10`, `1.4-jdk10`, `1.4.0-jdk10` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
+ * `1.4-jdk10`, `1.4-jdk10`, `1.4.10-jdk10` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
 
- * `1.4-jdk10-slim`, `1.4-jdk10-slim`, `1.4.0-jdk10-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
+ * `1.4-jdk10-slim`, `1.4-jdk10-slim`, `1.4.10-jdk10-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
 
- * `1.4-jdk8`, `1.4-jdk8`, `1.4.0-jdk8` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
+ * `1.4-jdk8`, `1.4-jdk8`, `1.4.10-jdk8` [(debian/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/debian/Dockerfile)
 
- * `1.4-jdk8-alpine`, `1.4-alpine`, `1.4.0-alpine`, `1.4-jdk8-alpine`, `1.4.0-jdk8-alpine` [(alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/alpine/Dockerfile)
+ * `1.4-jdk8-alpine`, `1.4-alpine`, `1.4.10-alpine`, `1.4-jdk8-alpine`, `1.4.10-jdk8-alpine` [(alpine/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/alpine/Dockerfile)
 
- * `1.4-jdk8-slim`, `1.4-jdk8-slim`, `1.4.0-jdk8-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
+ * `1.4-jdk8-slim`, `1.4-jdk8-slim`, `1.4.10-jdk8-slim` [(slim/Dockerfile)](https://github.com/Zenika/docker-kotlin/blob/master/slim/Dockerfile)
 
 #### 1.3
 
