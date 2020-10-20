@@ -1,64 +1,64 @@
 Versions:
   - Version: "1.4.20"
-    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.4.20-M1/kotlin-compiler-1.4.20-M1.zip
+    CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.4.20-M2/kotlin-compiler-1.4.20-M2.zip
     JDKVersions:
       - JDKVersion: "12"
         Base:
           Base: oracle
           AdditionalTags:
             - "1.4.20"
-            - 1.4.20-M1
-            - 1.4.20-M1-jdk12
+            - 1.4.20-M2
+            - 1.4.20-M2-jdk12
         Variants:
           - Base: alpine
             AdditionalTags:
-              - 1.4.20-M1-alpine
-              - 1.4.20-M1-jdk12-alpine
+              - 1.4.20-M2-alpine
+              - 1.4.20-M2-jdk12-alpine
             AdditionalRepositories:
               - Repository: zenika/alpine-kotlin
                 Tags:
                   - "1.4.20"
-                  - 1.4.20-M1
+                  - 1.4.20-M2
                   - 1.4.20-jdk12
-                  - 1.4.20-M1-jdk12
+                  - 1.4.20-M2-jdk12
       - JDKVersion: "11"
         Base:
           Base: debian
           AdditionalTags:
-            - 1.4.20-M1-jdk11
+            - 1.4.20-M2-jdk11
         Variants:
           - Base: slim
             AdditionalTags:
               - 1.4.20-slim
-              - 1.4.20-M1-slim
-              - 1.4.20-M1-jdk11-slim
+              - 1.4.20-M2-slim
+              - 1.4.20-M2-jdk11-slim
       - JDKVersion: "10"
         Base:
           Base: debian
           AdditionalTags:
-            - 1.4.20-M1-jdk10
+            - 1.4.20-M2-jdk10
         Variants:
           - Base: slim
             AdditionalTags:
-              - 1.4.20-M1-jdk10-slim
+              - 1.4.20-M2-jdk10-slim
       - JDKVersion: "8"
         Base:
           Base: debian
           AdditionalTags:
-            - 1.4.20-M1-jdk8
+            - 1.4.20-M2-jdk8
         Variants:
           - Base: alpine
             AdditionalTags:
-              - 1.4.20-M1-jdk8-alpine
+              - 1.4.20-M2-jdk8-alpine
             AdditionalRepositories:
               - Repository: zenika/alpine-kotlin
                 Tags:
                   - 1.4.20-jdk8
-                  - 1.4.20-M1-jdk8
+                  - 1.4.20-M2-jdk8
           - Base: slim
             AdditionalTags:
               - 1.4.20-jdk8-slim
-              - 1.4.20-M1-jdk8-slim
+              - 1.4.20-M2-jdk8-slim
   - Version: "1.4"
     CompilerURL: https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.10.zip
     JDKVersions:
